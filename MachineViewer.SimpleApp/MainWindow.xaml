@@ -1,0 +1,93 @@
+﻿<Window x:Class="MachineViewer.SimpleApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MachineViewer.SimpleApp"
+        xmlns:helix="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
+        xmlns:views="clr-namespace:MachineViewer.Views;assembly=MachineViewer"
+        xmlns:linkView="clr-namespace:MachineViewer.Plugins.Links.SimpleManipolator.Views;assembly=MachineViewer.Plugins.Links.SimpleManipolator"
+        xmlns:toolChangeView="clr-namespace:MachineViewer.Plugins.ToolChange.SimpleManipolator.Views;assembly=MachineViewer.Plugins.ToolChange.SimpleManipolator"
+        xmlns:panelHolderView="clr-namespace:MachineViewer.Plugins.Panel.SimpleManipolator.Views;assembly=MachineViewer.Plugins.Panel.SimpleManipolator"
+        xmlns:injectorView="clr-namespace:MachineViewer.Plugins.Injectors.SimpleManipolator.Views;assembly=MachineViewer.Plugins.Injectors.SimpleManipolator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem Header="Open" Command="{Binding FileOpenCommand}" />
+                    <MenuItem Header="Open archive" Command="{Binding FileOpenArchiveCommand}" />
+                </MenuItem>
+                <MenuItem Header="View">
+                    <MenuItem Header="Panel holder" IsCheckable="True" IsChecked="{Binding IsPanelHolderVisible}"/>
+                    <MenuItem Header="Colliders" IsCheckable="True" IsChecked="{Binding IsCollidersVisible}"/>
+                </MenuItem>
+                <MenuItem Header="Tooling">
+                    <MenuItem Header="Load" Command="{Binding ToolingLoadCommand}"/>
+                    <MenuItem Header="Unload" Command="{Binding ToolingUnloadCommand}" />
+                </MenuItem>
+                <MenuItem Header="Probe">
+                    <MenuItem Header="Add point" IsEnabled="{Binding IsProbeVisible, Mode=OneWay}" IsCheckable="True" IsChecked="{Binding AddProbePoint}"/>
+                    <MenuItem Header="Points distance" Command="{Binding AddPointDistanceCommand}"/>
+                    <MenuItem Header="Remove point" Command="{Binding RemoveProbeCommand}"/>
+                </MenuItem>
+            </Menu>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <TabControl SelectedIndex="{Binding TabSelectedIndex}" >
+
+                    <TabItem Header="Struct">
+                        <views:Struct />
+                    </TabItem>
+
+                    <TabItem Header="Probe">
+                        <views:Probes />
+                    </TabItem>
+
+                    <TabItem Header="Links" >
+                        <linkView:MainView />
+                    </TabItem>
+
+                    <TabItem Header="Tool change">
+                        <toolChangeView:MainView />
+                    </TabItem>
+
+                    <TabItem Header="Panel">
+                        <panelHolderView:MainView />
+                    </TabItem>
+
+                    <TabItem Header="Gantry">
+                        <linkView:GantryLinksView />
+                    </TabItem>
+
+                    <TabItem Header="Injectors">
+                        <injectorView:MainView />
+                    </TabItem>
+
+                </TabControl>
+
+                <GridSplitter Grid.Column="1"
+                          ResizeDirection="Columns"
+                          ResizeBehavior="PreviousAndNext"
+                          HorizontalAlignment="Stretch"/>
+
+                <helix:HelixViewport3D x:Name="view1" 
+                               Grid.Column="2" 
+                               ItemsSource="{Binding Models}" 
+                               Background="{helix:LinearGradientBrush Gray, White}"
+                               ShowFrameRate="True"
+                               ShowCoordinateSystem="True" 
+                               ShowCameraInfo="False"
+                               CalculateCursorPosition="True" />
+            </Grid>
+        </DockPanel>
+
+    </Grid>
+</Window>

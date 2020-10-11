@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2257D0EF-9E64-42FA-B14E-233E4BCACB13}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MachineViewer</RootNamespace>
+    <AssemblyName>MachineViewer</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="geometry3Sharp, Version=1.0.289.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\geometry3Sharp.1.0.289\lib\net45\geometry3Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="HelixToolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
+      <HintPath>..\packages\HelixToolkit.1.0.0\lib\portable-net45+win8+wpa81+wp8\HelixToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="HelixToolkit.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
+      <HintPath>..\packages\HelixToolkit.Wpf.1.0.0\lib\net45\HelixToolkit.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Behaviours\MouseHelpers.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\ProbeTypeToImageConverter.cs" />
+    <Compile Include="Enums\ProbeType.cs" />
+    <Compile Include="Extensions\ColliderExtensions.cs" />
+    <Compile Include="Extensions\InserterExtensions.cs" />
+    <Compile Include="Extensions\LinkExtensions.cs" />
+    <Compile Include="Extensions\MachineELementViewModelExtennsions.cs" />
+    <Compile Include="Extensions\PanelHolderExtensions.cs" />
+    <Compile Include="Extensions\ToolHolderViewModelExtensions.cs" />
+    <Compile Include="Messages\Inserter\DriveInserterByLinkMessage.cs" />
+    <Compile Include="Messages\Inserter\HookLinkByInserterMessage.cs" />
+    <Compile Include="Messages\Inserter\HookLinkForManageInsertersMessage.cs" />
+    <Compile Include="Messages\Inserter\InjectMessage.cs" />
+    <Compile Include="Messages\Inserter\InsertMessage.cs" />
+    <Compile Include="Messages\MaterialRemoval\GetActiveRoutToolMessage.cs" />
+    <Compile Include="Messages\MaterialRemoval\GetActiveToolMessage.cs" />
+    <Compile Include="Messages\Panel\GetPanelTransformMessage.cs" />
+    <Compile Include="Messages\Struct\SelectedStructItemChangedMessage.cs" />
+    <Compile Include="Messages\Tooling\CompleteToolLoadingMessage.cs" />
+    <Compile Include="Messages\Panel\GetPanelPositionMessage.cs" />
+    <Compile Include="Messages\Panel\HookPanelMessage.cs" />
+    <Compile Include="Messages\Tooling\LoadToolMessage.cs" />
+    <Compile Include="Messages\Probing\AddPointDistanceProbeMessage.cs" />
+    <Compile Include="Messages\Probing\AddProbeMessage.cs" />
+    <Compile Include="Messages\Probing\CanExecuteAddPointDistanceMessage.cs" />
+    <Compile Include="Messages\Probing\CanExecuteRemoveProbeMessage.cs" />
+    <Compile Include="Messages\Probing\GetMachineElementByClickGeometryMessage.cs" />
+    <Compile Include="Messages\Probing\RemoveSelectedProbeMessage.cs" />
+    <Compile Include="Messages\SelectionElementMessage.cs" />
+    <Compile Include="Messages\Trace\TraceBoxMessage.cs" />
+    <Compile Include="Messages\Trace\TracePointMessage.cs" />
+    <Compile Include="Messages\Trace\TracePointsMessage.cs" />
+    <Compile Include="Messages\Panel\UnhookPanelMessage.cs" />
+    <Compile Include="Messages\Tooling\UnloadToolMessage.cs" />
+    <Compile Include="Messages\Visibility\CollidersVisibilityChangedMessage.cs" />
+    <Compile Include="Messages\Visibility\PanelHolderVisibilityChangedMessage.cs" />
+    <Compile Include="Utilities\LinearLinkMovementItem.cs" />
+    <Compile Include="Utilities\LinkGroupMovementsItems\ArcMovementItem.cs" />
+    <Compile Include="Utilities\LinkGroupMovementsItems\XArcMovementItem.cs" />
+    <Compile Include="Utilities\LinkGroupMovementsItems\YArcMovementItem.cs" />
+    <Compile Include="Utilities\LinksMovementsGroup.cs" />
+    <Compile Include="Utilities\LinearLinkMovementManager.cs" />
+    <Compile Include="Utilities\LinkGroupMovementsItems\LinearMovementItem.cs" />
+    <Compile Include="Utilities\LinkGroupMovementsItems\MovementItem.cs" />
+    <Compile Include="ViewModels\Colladers\ColliderViewModel.cs" />
+    <Compile Include="ViewModels\Colladers\IPanelHooker.cs" />
+    <Compile Include="ViewModels\Colladers\PointsColliderViewModel.cs" />
+    <Compile Include="ViewModels\Inserter\InjecteorViewModel.cs" />
+    <Compile Include="ViewModels\Inserter\InserterBaseViewModel.cs" />
+    <Compile Include="ViewModels\Inserter\InserterViewModel.cs" />
+    <Compile Include="ViewModels\Links\IPneumaticColliderExtensionProvider.cs" />
+    <Compile Include="ViewModels\Links\IPneumaticPresserExtensionProvider.cs" />
+    <Compile Include="ViewModels\Links\IToolActivatorLinkExtension.cs" />
+    <Compile Include="ViewModels\Links\LinearPneumaticViewModel.cs" />
+    <Compile Include="ViewModels\Links\LinearPositionViewModel.cs" />
+    <Compile Include="ViewModels\Links\ILinkViewModelDescriptionProvider.cs" />
+    <Compile Include="ViewModels\Links\RotaryPneumaticViewModel.cs" />
+    <Compile Include="ViewModels\MachineElementViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PanelHolderViewModel.cs" />
+    <Compile Include="ViewModels\ProbesViewModel.cs" />
+    <Compile Include="ViewModels\Probing\PlaneProbeViewModel.cs" />
+    <Compile Include="ViewModels\Probing\PointProbeViewModel.cs" />
+    <Compile Include="ViewModels\Probing\PointsDistanceViewModel.cs" />
+    <Compile Include="ViewModels\Probing\ProbeViewModel.cs" />
+    <Compile Include="ViewModels\ToolHolder\AutoSinkToolHolderViewModel.cs" />
+    <Compile Include="ViewModels\ToolHolder\AutoSourceToolHolderViewModel.cs" />
+    <Compile Include="ViewModels\ToolHolder\StaticToolHolderViewModel.cs" />
+    <Compile Include="ViewModels\ToolHolder\ToolHolderViewModel.cs" />
+    <Compile Include="ViewModels\WorkablePanelViewModel.cs" />
+    <Compile Include="Views\Probes.xaml.cs">
+      <DependentUpon>Probes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Struct.xaml.cs">
+      <DependentUpon>Struct.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\Probes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Struct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MachineModels.IO\MachineModels.IO.csproj">
+      <Project>{3dd56b6d-b0d2-4501-9c46-0f809b24debd}</Project>
+      <Name>MachineModels.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineModels\MachineModels.csproj">
+      <Project>{63a9db57-6d03-48c4-a37f-bdf5965376c3}</Project>
+      <Name>MachineModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineViewer.Plugins.Common\MachineViewer.Plugins.Common.csproj">
+      <Project>{7862219c-7877-4aec-b583-fe5f5e91abdf}</Project>
+      <Name>MachineViewer.Plugins.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineViewer.Plugins.Injectors.SimpleManipolator\MachineViewer.Plugins.Injectors.SimpleManipolator.csproj">
+      <Project>{cf0981a7-ae35-45d3-82db-1ab650c51268}</Project>
+      <Name>MachineViewer.Plugins.Injectors.SimpleManipolator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineViewer.Plugins.Links.SimpleManipolator\MachineViewer.Plugins.Links.SimpleManipolator.csproj">
+      <Project>{87cac10e-6d92-4724-8509-23bc85746e81}</Project>
+      <Name>MachineViewer.Plugins.Links.SimpleManipolator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineViewer.Plugins.Panel.MaterialRemoval\MachineViewer.Plugins.Panel.MaterialRemoval.csproj">
+      <Project>{ba779d75-114e-45c0-8e48-563166ca800e}</Project>
+      <Name>MachineViewer.Plugins.Panel.MaterialRemoval</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineViewer.Plugins.Panel.SimpleManipolator\MachineViewer.Plugins.Panel.SimpleManipolator.csproj">
+      <Project>{78efcd06-ed7d-4857-8186-ad318fa107ce}</Project>
+      <Name>MachineViewer.Plugins.Panel.SimpleManipolator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineViewer.Plugins.ToolChange.SimpleManipolator\MachineViewer.Plugins.ToolChange.SimpleManipolator.csproj">
+      <Project>{4e16d6b8-a5a9-456e-8f2d-6b8f8ca7fc21}</Project>
+      <Name>MachineViewer.Plugins.ToolChange.SimpleManipolator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineViewModels\MachineViewModels.csproj">
+      <Project>{fa8f628e-9b16-4cd4-9118-da408c3e8dc7}</Project>
+      <Name>MachineViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineViewModelUtils\MachineViewModelUtils.csproj">
+      <Project>{c7bbffcb-3219-4dea-b268-2ea6ae0ed32e}</Project>
+      <Name>MachineViewModelUtils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

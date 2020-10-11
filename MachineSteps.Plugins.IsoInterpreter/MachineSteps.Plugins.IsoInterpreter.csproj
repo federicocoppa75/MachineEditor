@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{49B4AB8A-7308-48CA-BC91-2D6890F5A5CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MachineSteps.Plugins.IsoInterpreter</RootNamespace>
+    <AssemblyName>MachineSteps.Plugins.IsoInterpreter</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Esprima, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Esprima.1.0.0-beta-1186\lib\net45\Esprima.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Jint.3.0.0-beta-1525\lib\net45\Jint.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\BaseConvertAttribute.cs" />
+    <Compile Include="Attributes\EDKConverterAttribute.cs" />
+    <Compile Include="Attributes\EOKConverterAttribute.cs" />
+    <Compile Include="Attributes\ETKConverterAttribute.cs" />
+    <Compile Include="Attributes\GIstructionConverterAttribute.cs" />
+    <Compile Include="Attributes\IndexedBaseConverterAttribute.cs" />
+    <Compile Include="Attributes\MIstructionConverterAttribute.cs" />
+    <Compile Include="Attributes\SetVariableIstructionConverterAttribute.cs" />
+    <Compile Include="Attributes\SIstructionConverterAttribute.cs" />
+    <Compile Include="Attributes\VLConverterAttribute.cs" />
+    <Compile Include="Converters\ConvertersManager.cs" />
+    <Compile Include="Converters\EDK\EDK0Converter.cs" />
+    <Compile Include="Converters\EDK\EDK1Converter.cs" />
+    <Compile Include="Converters\EDK\EDK28Converter.cs" />
+    <Compile Include="Converters\ETK\ETK0Converter.cs" />
+    <Compile Include="Converters\ETK\ETK13Converter.cs" />
+    <Compile Include="Converters\ETK\ETK17Converter.cs" />
+    <Compile Include="Converters\ETK\ETK18Converter.cs" />
+    <Compile Include="Converters\ETK\ETK1Converter.cs" />
+    <Compile Include="Converters\ETK\ETK2Converter.cs" />
+    <Compile Include="Converters\ETK\ETK698Converter.cs" />
+    <Compile Include="Converters\ETK\ETK6Converter.cs" />
+    <Compile Include="Converters\ETK\ETK710Converter.cs" />
+    <Compile Include="Converters\ETK\ETK711Converter.cs" />
+    <Compile Include="Converters\ETK\ETK713Converter.cs" />
+    <Compile Include="Converters\ETK\ETK14Converter.cs" />
+    <Compile Include="Converters\ETK\ETK15Converter.cs" />
+    <Compile Include="Converters\ETK\ETK680Converter.cs" />
+    <Compile Include="Converters\ETK\ETK712Converter.cs" />
+    <Compile Include="Converters\ETK\ETK714Converter.cs" />
+    <Compile Include="Converters\ETK\ETK715Converter.cs" />
+    <Compile Include="Converters\ETK\ETK7Converter.cs" />
+    <Compile Include="Converters\ETK\ETK8Converter.cs" />
+    <Compile Include="Converters\G\G0Converter.cs" />
+    <Compile Include="Converters\G\G1Converter.cs" />
+    <Compile Include="Converters\G\G2Converter.cs" />
+    <Compile Include="Converters\G\G3Converter.cs" />
+    <Compile Include="Converters\M\M120Converter.cs" />
+    <Compile Include="Converters\M\M121Converter.cs" />
+    <Compile Include="Converters\M\M20Converter.cs" />
+    <Compile Include="Converters\M\M3Converter.cs" />
+    <Compile Include="Converters\M\M401Converter.cs" />
+    <Compile Include="Converters\M\M402Converter.cs" />
+    <Compile Include="Converters\M\M403Converter.cs" />
+    <Compile Include="Converters\M\M404Converter.cs" />
+    <Compile Include="Converters\M\M405Converter.cs" />
+    <Compile Include="Converters\M\M406Converter.cs" />
+    <Compile Include="Converters\M\M407Converter.cs" />
+    <Compile Include="Converters\M\M409Converter.cs" />
+    <Compile Include="Converters\M\M419Converter.cs" />
+    <Compile Include="Converters\M\M420Converter.cs" />
+    <Compile Include="Converters\M\M425Converter.cs" />
+    <Compile Include="Converters\M\M427Converter.cs" />
+    <Compile Include="Converters\M\M428Converter.cs" />
+    <Compile Include="Converters\M\M429Converter.cs" />
+    <Compile Include="Converters\M\M430Converter.cs" />
+    <Compile Include="Converters\M\M431Converter.cs" />
+    <Compile Include="Converters\M\M5Converter.cs" />
+    <Compile Include="Converters\M\M80Converter.cs" />
+    <Compile Include="Converters\SIstructionConverter.cs" />
+    <Compile Include="Converters\State.cs" />
+    <Compile Include="Converters\StateData\Axes.cs" />
+    <Compile Include="Converters\StateData\Clamp.cs" />
+    <Compile Include="Converters\StateData\Driller.cs" />
+    <Compile Include="Converters\StateData\LateralPresser.cs" />
+    <Compile Include="Converters\StateData\Panel.cs" />
+    <Compile Include="Converters\VL\VL194Converter.cs" />
+    <Compile Include="Converters\VL\VL203Converter.cs" />
+    <Compile Include="Converters\VL\VL240Converter.cs" />
+    <Compile Include="Enums\ClampPressionState.cs" />
+    <Compile Include="Enums\ClampState.cs" />
+    <Compile Include="Enums\ElectrospidleRotationState.cs" />
+    <Compile Include="Enums\IsoLineType.cs" />
+    <Compile Include="Enums\LateralPresserPressureState.cs" />
+    <Compile Include="Enums\LateralPresserState.cs" />
+    <Compile Include="Enums\ShiftDirection.cs" />
+    <Compile Include="Enums\VariableType.cs" />
+    <Compile Include="Extensions\IsoLineExtension.cs" />
+    <Compile Include="Helpers\ExpressionHelper.cs" />
+    <Compile Include="Helpers\IfThenElseHelper.cs" />
+    <Compile Include="Istructions\IstructionToActionConverter.cs" />
+    <Compile Include="Messages\Conversion\BaseIstructionMessage.cs" />
+    <Compile Include="Messages\Conversion\GIstructionMessage.cs" />
+    <Compile Include="Messages\Conversion\IstructionListenerSwitchOffMessage.cs" />
+    <Compile Include="Messages\Conversion\IstructionListenerSwitchOnMessage.cs" />
+    <Compile Include="Messages\Conversion\MIstructionMessage.cs" />
+    <Compile Include="Messages\Conversion\SetVariableMessage.cs" />
+    <Compile Include="Messages\Conversion\SIstructionMessage.cs" />
+    <Compile Include="Messages\FlushIsoLinesMessage.cs" />
+    <Compile Include="Messages\G0LineMessage.cs" />
+    <Compile Include="Messages\G1LineMessage.cs" />
+    <Compile Include="Messages\G2ArcMessage.cs" />
+    <Compile Include="Messages\G3ArcMessage.cs" />
+    <Compile Include="Messages\G90Message.cs" />
+    <Compile Include="Messages\G91Message.cs" />
+    <Compile Include="Messages\GArcMessage.cs" />
+    <Compile Include="Messages\GElementMessage.cs" />
+    <Compile Include="Messages\GetActiveLevelOffsetMessage.cs" />
+    <Compile Include="Messages\GetAxesParametersMessage.cs" />
+    <Compile Include="Messages\GetAxisValueMessage.cs" />
+    <Compile Include="Messages\GetSelectedStepMessage.cs" />
+    <Compile Include="Messages\GetStoragedExkParametersMessage.cs" />
+    <Compile Include="Messages\GetVariableValueMessage.cs" />
+    <Compile Include="Messages\GLineMessage.cs" />
+    <Compile Include="Messages\IfThenLineMessage.cs" />
+    <Compile Include="Messages\InibitIsoLineMessage.cs" />
+    <Compile Include="Messages\InvalidateIsoLineInibitionMessage.cs" />
+    <Compile Include="Messages\IsoLineSelectionChangedMessage.cs" />
+    <Compile Include="Messages\MLineMessage.cs" />
+    <Compile Include="Messages\NotifyNotFoundParameterMessage.cs" />
+    <Compile Include="Messages\NullIsoLineSelectionMessage.cs" />
+    <Compile Include="Messages\SetAxesParametersMessage.cs" />
+    <Compile Include="Messages\SetMatrixLevelMessage.cs" />
+    <Compile Include="Messages\SetStoragedExkParametersMessage.cs" />
+    <Compile Include="Messages\SetVariableValueMessage.cs" />
+    <Compile Include="Messages\ShiftValueChangedMessage.cs" />
+    <Compile Include="Messages\SLineMessage.cs" />
+    <Compile Include="Models\ElseIfLine.cs" />
+    <Compile Include="Models\EndIfLine.cs" />
+    <Compile Include="Models\ExkVariableLine.cs" />
+    <Compile Include="Models\G0Line.cs" />
+    <Compile Include="Models\G1Line.cs" />
+    <Compile Include="Models\G2Arc.cs" />
+    <Compile Include="Models\G3Arc.cs" />
+    <Compile Include="Models\G90.cs" />
+    <Compile Include="Models\G91.cs" />
+    <Compile Include="Models\GArc.cs" />
+    <Compile Include="Models\GElement.cs" />
+    <Compile Include="Models\GLine.cs" />
+    <Compile Include="Models\IfThenLine.cs" />
+    <Compile Include="Models\IsoLine.cs" />
+    <Compile Include="Models\IsoLineFactory.cs" />
+    <Compile Include="Models\M3SLine.cs" />
+    <Compile Include="Models\MLine.cs" />
+    <Compile Include="Models\MlvLine.cs" />
+    <Compile Include="Models\Parameter.cs" />
+    <Compile Include="Models\ParametersSet.cs" />
+    <Compile Include="Models\ShiftLine.cs" />
+    <Compile Include="Models\SLine.cs" />
+    <Compile Include="Models\VariableLine.cs" />
+    <Compile Include="Models\VlVariableLine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AxesParametersViewModel.cs" />
+    <Compile Include="ViewModels\ExkVariablesViewModel.cs" />
+    <Compile Include="ViewModels\IsoLineViewModel.cs" />
+    <Compile Include="ViewModels\MatrixLevelViewModel.cs" />
+    <Compile Include="ViewModels\MLineViewModel.cs" />
+    <Compile Include="ViewModels\ParametersViewModel.cs" />
+    <Compile Include="ViewModels\ParameterViewModel.cs" />
+    <Compile Include="ViewModels\RapidPositionCoordinateViewModel.cs" />
+    <Compile Include="ViewModels\RapidPositionViewModel.cs" />
+    <Compile Include="ViewModels\SLineViewModel.cs" />
+    <Compile Include="ViewModels\StateViewModel.cs" />
+    <Compile Include="ViewModels\StoragedExkVariableViewModel.cs" />
+    <Compile Include="ViewModels\VariablesViewModel.cs" />
+    <Compile Include="ViewModels\VariableViewModel.cs" />
+    <Compile Include="ViewModels\VlVariablesViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\EOK\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MachineSteps.Models\MachineSteps.Models.csproj">
+      <Project>{cbad07c8-b186-4e79-99d7-c46880b31aa5}</Project>
+      <Name>MachineSteps.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineSteps.Plugins.IsoConverterBase\MachineSteps.Plugins.IsoConverterBase.csproj">
+      <Project>{F5E266DD-DE52-42AC-B9E9-E366065F7F50}</Project>
+      <Name>MachineSteps.Plugins.IsoConverterBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineSteps.Plugins.IsoIstructions\MachineSteps.Plugins.IsoIstructions.csproj">
+      <Project>{42707A57-AFFD-495D-B54E-92CE4EC54431}</Project>
+      <Name>MachineSteps.Plugins.IsoIstructions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7862219C-7877-4AEC-B583-FE5F5E91ABDF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MachineViewer.Plugins.Common</RootNamespace>
+    <AssemblyName>MachineViewer.Plugins.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\Links\Interpolation\ArcComponent.cs" />
+    <Compile Include="Messages\Generic\BackNotificationMessage.cs" />
+    <Compile Include="Messages\Generic\BaseBackNotificationIdMessage.cs" />
+    <Compile Include="Messages\Inserter\InjectMessage.cs" />
+    <Compile Include="Messages\Inserter\UpdateAvailableInjectorsMessage.cs" />
+    <Compile Include="Messages\Inverters\TurnOffInverterMessage.cs" />
+    <Compile Include="Messages\Inverters\TurnOnInverterMessage.cs" />
+    <Compile Include="Messages\Inverters\UpdateInverterMessage.cs" />
+    <Compile Include="Messages\Links\ArcInterpolationLinkMessage.cs" />
+    <Compile Include="Messages\Links\CheckLinkPresenceMessage.cs" />
+    <Compile Include="Messages\Links\EnableGradualTransitionMessage.cs" />
+    <Compile Include="Messages\Links\EnablePneumaticTransactionMessage.cs" />
+    <Compile Include="Messages\Links\IUpdatableValueLink.cs" />
+    <Compile Include="Messages\Links\LinearInterpolationLinkMessage.cs" />
+    <Compile Include="Messages\Links\MoveLinearLinkMessage.cs" />
+    <Compile Include="Messages\Links\ReadLinearLinkStateMessage.cs" />
+    <Compile Include="Messages\Links\ReadLinkLimitsMessage.cs" />
+    <Compile Include="Messages\Links\ReadLinkStateMessage.cs" />
+    <Compile Include="Messages\Links\ReadTwoPositionLinkDurationMessage.cs" />
+    <Compile Include="Messages\Links\ReadTwoPositionLinkStateMessage.cs" />
+    <Compile Include="Messages\Links\RequestLinksListMessage.cs" />
+    <Compile Include="Messages\Links\UpdateLinearLinkStateMessage.cs" />
+    <Compile Include="Messages\Links\UpdateLinearLinkStateToTargetMessage.cs" />
+    <Compile Include="Messages\Links\UpdateLinksListMessage.cs" />
+    <Compile Include="Messages\Links\UpdateLinkStateMessage.cs" />
+    <Compile Include="Messages\Links\UpdateTwoPositionLinkStateMessage.cs" />
+    <Compile Include="Messages\PanelHolder\GetAvailablePanelHoldersMessage.cs" />
+    <Compile Include="Messages\PanelHolder\LoadPanelMessage.cs" />
+    <Compile Include="Messages\PanelHolder\UnloadPanelMessage.cs" />
+    <Compile Include="Messages\PanelHolder\UpdateAvailablePanelHolderMessage.cs" />
+    <Compile Include="Messages\ToolChange\GetAvailableToolMessage.cs" />
+    <Compile Include="Messages\ToolChange\GetAvailableToolSinkMessage.cs" />
+    <Compile Include="Messages\ToolChange\UnloadAllToolsMessage.cs" />
+    <Compile Include="Messages\ToolChange\UpdateAvailableToolSinkListMessage.cs" />
+    <Compile Include="Messages\ToolChange\UpdateAvailableToolsListMessage.cs" />
+    <Compile Include="Messages\ToolChange\LoadToolMessage.cs" />
+    <Compile Include="Messages\ToolChange\UnloadToolMessage.cs" />
+    <Compile Include="Models\Links\Interpolation\ArcComponentData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MachineModels\MachineModels.csproj">
+      <Project>{63a9db57-6d03-48c4-a37f-bdf5965376c3}</Project>
+      <Name>MachineModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

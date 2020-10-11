@@ -1,0 +1,147 @@
+﻿<Window x:Class="MachineSteps.Viewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MachineSteps.Viewer"
+        xmlns:helix="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
+        xmlns:views="clr-namespace:MachineViewer.Views;assembly=MachineViewer"
+        xmlns:converters="clr-namespace:MachineViewer.Converters;assembly=MachineViewer"
+        xmlns:linkView="clr-namespace:MachineViewer.Plugins.Links.SimpleManipolator.Views;assembly=MachineViewer.Plugins.Links.SimpleManipolator"
+        xmlns:localView="clr-namespace:MachineSteps.Plugins.StepsViewer.Views;assembly=MachineSteps.Plugins.StepsViewer"
+        xmlns:localConv="clr-namespace:MachineSteps.Plugins.StepsViewer.Converters;assembly=MachineSteps.Plugins.StepsViewer"
+        xmlns:toolChangeView="clr-namespace:MachineViewer.Plugins.ToolChange.SimpleManipolator.Views;assembly=MachineViewer.Plugins.ToolChange.SimpleManipolator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
+        <localConv:AxIdToLabelCharConverter x:Key="axIdToLabelCharConverter">
+            <localConv:AxIdToLabelCharConverterItem When="1" Then="X" />
+            <localConv:AxIdToLabelCharConverterItem When="2" Then="U" />
+            <localConv:AxIdToLabelCharConverterItem When="101" Then="Y" />
+            <localConv:AxIdToLabelCharConverterItem When="201" Then="V" />
+            <localConv:AxIdToLabelCharConverterItem When="102" Then="Z" />
+            <localConv:AxIdToLabelCharConverterItem When="202" Then="W" />
+            <localConv:AxIdToLabelCharConverterItem When="112" Then="A" />
+            <localConv:AxIdToLabelCharConverterItem When="212" Then="B" />
+        </localConv:AxIdToLabelCharConverter>
+    </Window.Resources>
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem Header="Open" Command="{Binding FileOpenCommand}" />
+                    <Separator/>
+                    <MenuItem Header="Open archive" Command="{Binding FileOpenArchiveCommand}" />
+                    <Separator/>
+                    <MenuItem Header="Open environment" Command="{Binding FileOpenEnvironmentCommand}" />
+                    <MenuItem Header="Save enviroment" Command="{Binding FileSaveEnvironmentCommand}" />
+                </MenuItem>
+                <MenuItem Header="View">
+                    <MenuItem Header="Panel holder" IsCheckable="True" IsChecked="{Binding IsPanelHolderVisible}"/>
+                    <MenuItem Header="Colliders" IsCheckable="True" IsChecked="{Binding IsCollidersVisible}"/>
+                    <Separator/>
+                    <MenuItem Header="DefaultLights" IsChecked="{Binding IsDefaultLights}" IsCheckable="True"/>
+                    <MenuItem Header="SunLight" IsChecked="{Binding IsSunLight}" IsCheckable="True" />
+                    <MenuItem Header="SpotHeadLight" IsChecked="{Binding IsSpotHeadLight}" IsCheckable="True" />
+                </MenuItem>
+                <MenuItem Header="Tooling">
+                    <MenuItem Header="Load" Command="{Binding ToolingLoadCommand}"/>
+                    <MenuItem Header="Unload" Command="{Binding ToolingUnloadCommand}" />
+                </MenuItem>
+                <MenuItem Header="Probe">
+                    <MenuItem Header="Add point" IsEnabled="{Binding IsProbeVisible, Mode=OneWay}" IsCheckable="True" IsChecked="{Binding AddProbePoint}"/>
+                    <MenuItem Header="Points distance" Command="{Binding AddPointDistanceCommand}"/>
+                    <MenuItem Header="Remove point" Command="{Binding RemoveProbeCommand}"/>
+                </MenuItem>
+                <MenuItem Header="Steps">
+                    <MenuItem Header="Load" Command="{Binding LoadStepsCommand}" />
+                    <MenuItem Header="UnLoad" Command="{Binding UnloadStepsCommand}" />
+                    <Separator/>
+                    <MenuItem Header="Dynamic transition" IsCheckable="True" IsChecked="{Binding DynamicTransition}"/>
+                    <MenuItem Header="Auto step over" IsCheckable="True" IsChecked="{Binding AutoStepOver}"/>
+                    <Separator/>
+                    <MenuItem Header="Material removal" IsCheckable="True" IsChecked="{Binding MaterialRemoval}" />
+                </MenuItem>
+            </Menu>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <TabControl SelectedIndex="{Binding TabSelectedIndex}" >
+
+                    <TabItem Header="Struct">
+                        <views:Struct />
+                    </TabItem>
+
+                    <TabItem Header="Probe">
+                        <views:Probes />
+                    </TabItem>
+
+                    <TabItem Header="Links" >
+                        <linkView:MainView />
+                    </TabItem>
+
+                    <TabItem Header="Steps" ToolTip="Machine steps">
+                        <localView:Steps/>
+                    </TabItem>
+
+                    <TabItem Header="Tool change">
+                        <toolChangeView:MainView />
+                    </TabItem>
+                </TabControl>
+
+                <GridSplitter Grid.Column="1"
+                          ResizeDirection="Columns"
+                          ResizeBehavior="PreviousAndNext"
+                          HorizontalAlignment="Stretch"/>
+
+                <helix:HelixViewport3D x:Name="view1" 
+                               Grid.Column="2" 
+                               ItemsSource="{Binding Models}" 
+                               Background="{helix:LinearGradientBrush Gray, White}"
+                               ShowFrameRate="True"
+                               ShowCoordinateSystem="True" 
+                               ShowCameraInfo="False"
+                               CalculateCursorPosition="True" />
+
+                <StackPanel Orientation="Horizontal" Grid.Column="2" >
+                    <Grid  HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" Margin="5,5,0,0" IsHitTestVisible="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBox Text="{Binding StepTime, StringFormat={}{0:mm\\:ss\\.ff}}" Visibility="{Binding IsStepTimeVisible, Converter={StaticResource boolToVisibilityConverter}}" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True"/>
+                        <ItemsControl Grid.Row="1" Background="Transparent" BorderBrush="Transparent" ItemsSource="{Binding LinearPositionLinks}" Visibility="{Binding IsAxesStateVisible, Converter={StaticResource boolToVisibilityConverter}}" >
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Background="Transparent">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Text="{Binding Id, Converter={StaticResource axIdToLabelCharConverter}}" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True" HorizontalAlignment="Left"/>
+                                        <TextBox Text="{Binding Value, StringFormat={}{0:0.00}}" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True" Grid.Column="2" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>                            
+                        </ItemsControl>
+                        <Grid Grid.Row="2" Visibility="{Binding IsInverterStateVisible, Converter={StaticResource boolToVisibilityConverter}}" Background="Transparent" IsHitTestVisible="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Text="{Binding InverterName}" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True" HorizontalAlignment="Left"/>
+                            <TextBox Text="{Binding InverterValue}" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left"/>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

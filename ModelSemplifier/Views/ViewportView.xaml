@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="ModelSemplifier.Views.ViewportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ModelSemplifier.Views"
+             xmlns:helix="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.Resources>
+            <local:BindingProxy x:Key="proxy" Data="{Binding}" />
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <helix:HelixViewport3D Grid.Row="1">
+
+            <helix:HelixViewport3D.Camera>
+                <PerspectiveCamera 
+                    Position="{Binding Data.Camera.Position,Mode=TwoWay, Source={StaticResource proxy}}"
+                    LookDirection="{Binding Data.Camera.LookDirection,Mode=TwoWay, Source={StaticResource proxy}}"
+                    UpDirection="{Binding Data.Camera.UpDirection,Mode=TwoWay, Source={StaticResource proxy}}"
+                    FieldOfView="{Binding Data.Camera.FieldOfView,Mode=TwoWay, Source={StaticResource proxy}}"
+                    />
+            </helix:HelixViewport3D.Camera>
+
+            <!--<helix:CubeVisual3D Fill="Blue"/>-->
+            <helix:MeshGeometryVisual3D MeshGeometry="{Binding MeshGeometry}" />
+            <helix:DefaultLights/>
+        </helix:HelixViewport3D>
+
+        <StackPanel Grid.Row="1" Width="100" HorizontalAlignment="Left">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Vertexs" Background="Transparent"/>
+                <TextBlock Text="Faces" Grid.Row="1" Background="Transparent" />
+                <TextBox Text="{Binding VertexesCount, Mode=OneWay}" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True" Grid.Column="1"/>
+                <TextBox Text="{Binding FacesCount, Mode=OneWay}" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True" Grid.Column="1" Grid.Row="1"/>
+
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

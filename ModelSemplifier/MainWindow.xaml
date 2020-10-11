@@ -1,0 +1,45 @@
+﻿<Window x:Class="ModelSemplifier.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ModelSemplifier"
+        xmlns:views="clr-namespace:ModelSemplifier.Views"
+        xmlns:conv="clr-namespace:ModelSemplifier.Converters"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding Main, Source={StaticResource viewModelLocator}}">
+    <Window.Resources>
+        <conv:IntToBoolConverter x:Key="intToBoolConverter"/>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Command="{Binding FileOpenCommand}" />
+                <MenuItem Header="Save" Command="{Binding FileSaveCommand}" />
+            </MenuItem>
+            <MenuItem Header="Process">
+                <MenuItem Header="1-1" IsCheckable="True" IsChecked="{Binding ReduxFactor, ConverterParameter=1, Converter={StaticResource intToBoolConverter}}" />
+                <MenuItem Header="1-2" IsCheckable="True" IsChecked="{Binding ReduxFactor, ConverterParameter=2, Converter={StaticResource intToBoolConverter}}" />
+                <MenuItem Header="1-3" IsCheckable="True" IsChecked="{Binding ReduxFactor, ConverterParameter=3, Converter={StaticResource intToBoolConverter}}" />
+                <MenuItem Header="1-4" IsCheckable="True" IsChecked="{Binding ReduxFactor, ConverterParameter=4, Converter={StaticResource intToBoolConverter}}" />
+                <MenuItem Header="1-5" IsCheckable="True" IsChecked="{Binding ReduxFactor, ConverterParameter=5, Converter={StaticResource intToBoolConverter}}" />
+                <MenuItem Header="1-10" IsCheckable="True" IsChecked="{Binding ReduxFactor, ConverterParameter=10, Converter={StaticResource intToBoolConverter}}" />
+                <MenuItem Header="1-20" IsCheckable="True" IsChecked="{Binding ReduxFactor, ConverterParameter=20, Converter={StaticResource intToBoolConverter}}" />
+                <MenuItem Header="1-50" IsCheckable="True" IsChecked="{Binding ReduxFactor, ConverterParameter=50, Converter={StaticResource intToBoolConverter}}" />
+                <MenuItem Header="1-100" IsCheckable="True" IsChecked="{Binding ReduxFactor, ConverterParameter=100, Converter={StaticResource intToBoolConverter}}" />
+            </MenuItem>
+        </Menu>
+
+        <Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <views:ViewportView Grid.Column="0" DataContext="{Binding Viewport1}"/>
+                <views:ViewportView Grid.Column="1" DataContext="{Binding Viewport2}"/>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>

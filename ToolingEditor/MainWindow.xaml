@@ -1,0 +1,47 @@
+﻿<Window x:Class="ToolingEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToolingEditor"       
+        xmlns:view="clr-namespace:ToolingEditor.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding Main, Source={StaticResource locator}}">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Command="{Binding OpenFile}"/>
+                <MenuItem Header="Save" Command="{Binding SaveFile}"/>
+            </MenuItem>
+            <MenuItem Header="Input">
+                <MenuItem Header="Open machine" Command="{Binding OpenMachineFile}"/>
+                <MenuItem Header="Open tools db" Command="{Binding OpenToolsFile}"/>
+            </MenuItem>
+            <MenuItem Header="Tooling">
+                <MenuItem Header="Load tool" Command="{Binding LoadTool}"/>
+                <MenuItem Header="Unload tool" Command="{Binding UnloadTool}"/>
+                <MenuItem Header="Unload all tool" Command="{Binding UnloadAllTool}"/>
+            </MenuItem>
+        </Menu>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <view:MachineElementsView />
+
+            <GridSplitter Grid.Column="1"
+                          ResizeDirection="Columns"
+                          ResizeBehavior="PreviousAndNext"
+                          HorizontalAlignment="Stretch"/>
+
+            <view:ToolsView Grid.Column="2" />
+
+        </Grid>
+
+    </DockPanel>
+</Window>

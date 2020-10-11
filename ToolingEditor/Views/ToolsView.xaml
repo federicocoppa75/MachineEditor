@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="ToolingEditor.Views.ToolsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ToolingEditor.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400"
+             DataContext="{Binding Tools, Source={StaticResource locator}}">
+    
+    <ListView ItemsSource="{Binding Tools}" SelectedItem="{Binding Selected}">
+        <ListView.View>
+            <GridView>
+                <GridView.Columns>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Diameter" DisplayMemberBinding="{Binding TotalDiameter}"/>
+                    <GridViewColumn Header="Length" DisplayMemberBinding="{Binding TotalLength}"/>
+                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding ToolType}"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
+                </GridView.Columns>
+            </GridView>
+        </ListView.View>
+    </ListView>
+</UserControl>

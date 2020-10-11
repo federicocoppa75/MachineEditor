@@ -1,0 +1,141 @@
+﻿<Window x:Class="MachineSteps.IsoInterpreter.SimpleApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MachineSteps.IsoInterpreter.SimpleApp"
+        xmlns:views="clr-namespace:MachineSteps.IsoInterpreter.SimpleApp.Views"
+        xmlns:converters="clr-namespace:MachineSteps.IsoInterpreter.SimpleApp.Converters"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding Main, Source={StaticResource viewModelLocator}}">
+    <Window.Resources>
+        <converters:IsoLineExecutableStateConverter x:Key="isoLineExecutableStateConverter">
+            <converters:IsoLineExecutableStateConverterItem When="False" Then="x"/>
+            <converters:IsoLineExecutableStateConverterItem When="True" Then="`"/>
+        </converters:IsoLineExecutableStateConverter>
+    </Window.Resources>
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem Header="Open" Command="{Binding OpenFile}"/>
+                    <MenuItem Header="Close" Command="{Binding CloseFile}"/>
+                    <Separator />
+                    <MenuItem Header="Open parameters" Command="{Binding OpenParametersFile}" />
+                    <MenuItem Header="Save parameters" Command="{Binding SaveParametersFile}" />
+                </MenuItem>
+                <MenuItem Header="Command">
+                    <MenuItem Header="One shot process" Command="{Binding OneShotProcess}" />
+                </MenuItem>
+            </Menu>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <DockPanel>
+                    <Label Content="ISO lines" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" DockPanel.Dock="Top"/>
+                    <ListView ItemsSource="{Binding IsoLines}" SelectedItem="{Binding Selected}">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Line" DisplayMemberBinding="{Binding Number}" Width="50" />
+                                    <GridViewColumn Header="Text" DisplayMemberBinding="{Binding Data}" Width="250"/>
+                                    <GridViewColumn Header="State" Width="40">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding Executable, Converter={StaticResource isoLineExecutableStateConverter}}" FontFamily="Webdings" FontSize="20" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </DockPanel>
+
+                <GridSplitter Grid.Column="1"
+                          ResizeDirection="Columns"
+                          ResizeBehavior="PreviousAndNext"
+                          HorizontalAlignment="Stretch"/>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <views:StateView />
+
+                    <GridSplitter Grid.Row="1"
+                          ResizeDirection="Rows"
+                          ResizeBehavior="PreviousAndNext"
+                          HorizontalAlignment="Stretch"/>
+
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition  />
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="25" />
+                        </Grid.RowDefinitions>
+                        <views:RapidPositionView Grid.Row="0" />
+                        <views:LastMIstructionView Grid.Row="1"/>
+                        <views:LastSIstructionView Grid.Row="2"/>
+                    </Grid>
+
+
+
+                    <GridSplitter Grid.Row="3"
+                          ResizeDirection="Rows"
+                          ResizeBehavior="PreviousAndNext"
+                          HorizontalAlignment="Stretch"/>
+
+                    <views:AxesParametersView Grid.Row="4" />
+
+                </Grid>
+
+                <GridSplitter Grid.Column="3"
+                          ResizeDirection="Columns"
+                          ResizeBehavior="PreviousAndNext"
+                          HorizontalAlignment="Stretch"/>
+
+                <views:VariableView Grid.Column="4" />
+
+                <GridSplitter Grid.Column="5"
+                          ResizeDirection="Columns"
+                          ResizeBehavior="PreviousAndNext"
+                          HorizontalAlignment="Stretch"/>
+
+                <Grid Grid.Column="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <views:ExkVariableView />
+
+                    <GridSplitter Grid.Row="1"
+                          ResizeDirection="Rows"
+                          ResizeBehavior="PreviousAndNext"
+                          HorizontalAlignment="Stretch"/>
+
+                    <views:StoragedExkVariableView Grid.Row="2"/>
+                </Grid>
+
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

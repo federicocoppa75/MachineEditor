@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="MachineSteps.IsoInterpreter.SimpleApp.Views.StoragedExkVariableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MachineSteps.IsoInterpreter.SimpleApp.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding StoragedExkParameters, Source={StaticResource viewModelLocator}}">
+    <Grid>
+        <DockPanel>
+            <Label Content="Storaged ETK/EDK/EOK" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" DockPanel.Dock="Top"/>
+            <ListView ItemsSource="{Binding Parameters}">
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="100" />
+                            <!--<GridViewColumn Header="Value" DisplayMemberBinding="{Binding Value}" Width="100" />-->
+                            <GridViewColumn Header="Value" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Value}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </DockPanel>
+    </Grid>
+</UserControl>

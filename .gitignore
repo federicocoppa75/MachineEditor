@@ -1,0 +1,15 @@
+$ cat .gitignore
+# ouput folder
+bin/
+
+# obj folder
+obj/
+
+#package folder
+packages/
+
+#modified file (by diff - *.bak)
+*.bak
+
+# vs folder
+.vs/
