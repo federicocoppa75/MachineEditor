@@ -26,9 +26,12 @@ Application for viewing machine movements
 <!-- ## MachineViewer
 ## MachineViewer.Plugins.Common
 ## MachineViewer.Plugins.Injectors.SimpleManipolator
-## MachineViewer.Plugins.Links.SimpleManipolator
+## MachineViewer.Plugins.Links.SimpleManipolator -->
+
 ## MachineViewer.Plugins.Panel.MaterialRemoval
-## MachineViewer.Plugins.Panel.SimpleManipolator
+This is the library that implements the material removal. It uses [**geometry3Sharp**](https://github.com/gradientspace/geometry3Sharp).
+
+<!-- ## MachineViewer.Plugins.Panel.SimpleManipolator
 ## MachineViewer.Plugins.ToolChange.SimpleManipolator
 ## MachineViewer.Plugins.Tooling.SimpleManipolator -->
 
@@ -45,12 +48,19 @@ Application for the simplification of models (mesh - .stl file) of the machine p
 ## TestIsoParser
 Driver application for the MachineSteps.Plugins.IsoParser module.
 
-<!-- [comment]:## TestMaterialRemoval
-[comment]:## TestMovePanel
+## TestMaterialRemoval
+This video shows the test application for the material removal library.
+
+[![](.\images\TestMaterialRemoval.JPG)](https://www.youtube.com/watch?v=buKEhHzB6Eg)
+<!-- [comment]:## TestMovePanel
 [comment]:## TestTrasform -->
 
 ## ToolEditor
-Tools editor.
+This is a tool to create a tool set that can be used to create a tooling (via [ToolingEditor](#ToolEditor)) that can then be loaded from a machine model loaded in [MachineViewer.SimpleApp](#MachineViewer.SimpleApp) or [MachineSteps.Viewer](#MachineSteps.Viewer).
+
+![](.\images\ToolEditor.JPG)
 
 ## ToolingEditor
-Tooling editor.
+This is a tool to create a tooling which can then be loaded from a machine model loaded in [MachineViewer.SimpleApp](#MachineViewer.SimpleApp) or [MachineSteps.Viewer](#MachineSteps.Viewer).
+
+![](.\images\ToolingEditor.JPG)
