@@ -19,6 +19,7 @@ namespace MachineSteps.Plugins.IsoInterpreter.Models
         public static IsoLine Parse(string data)
         {
             var str = Regex.Replace(data, "S", "");
+            str = str.Replace("M3", "");
             var v = int.Parse(str);
 
             return new SLine() { Value = v };
