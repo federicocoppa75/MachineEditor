@@ -51,16 +51,16 @@ Driver application for the MachineSteps.Plugins.IsoParser module.
 ## TestMaterialRemoval
 This video shows the test application for the material removal library.
 
-[![](.\images\TestMaterialRemoval.JPG)](https://www.youtube.com/watch?v=buKEhHzB6Eg)
+[![](./images/TestMaterialRemoval.JPG)](https://www.youtube.com/watch?v=buKEhHzB6Eg)
 <!-- [comment]:## TestMovePanel
 [comment]:## TestTrasform -->
 
 ## ToolEditor
 This is a tool to create a tool set that can be used to create a tooling (via [ToolingEditor](#ToolEditor)) that can then be loaded from a machine model loaded in [MachineViewer.SimpleApp](#MachineViewer.SimpleApp) or [MachineSteps.Viewer](#MachineSteps.Viewer).
 
-![](.\images\ToolEditor.JPG)
+![](./images/ToolEditor.JPG)
 
 ## ToolingEditor
 This is a tool to create a tooling which can then be loaded from a machine model loaded in [MachineViewer.SimpleApp](#MachineViewer.SimpleApp) or [MachineSteps.Viewer](#MachineSteps.Viewer).
 
-![](.\images\ToolingEditor.JPG)
+![](./images/ToolingEditor.JPG)
