@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ToolSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Tools>
+    <Tool xsi:type="SimpleTool">
+      <Name>Drill D8</Name>
+      <Description>Drill tool (diameter 8 mm)</Description>
+      <ToolLinkType>Static</ToolLinkType>
+      <Diameter>8</Diameter>
+      <Length>50</Length>
+      <UsefulLength>35</UsefulLength>
+    </Tool>
+    <Tool xsi:type="SimpleTool">
+      <Name>Drill D5</Name>
+      <Description>Drill tool (diameter 5 mm)</Description>
+      <ToolLinkType>None</ToolLinkType>
+      <Diameter>5</Diameter>
+      <Length>50</Length>
+      <UsefulLength>35</UsefulLength>
+    </Tool>
+    <Tool xsi:type="SimpleTool">
+      <Name>Rout D20</Name>
+      <Description>Rout tool (diameter 20 mm)</Description>
+      <ToolLinkType>None</ToolLinkType>
+      <Diameter>20</Diameter>
+      <Length>120</Length>
+      <UsefulLength>60</UsefulLength>
+    </Tool>
+  </Tools>
+</ToolSet>

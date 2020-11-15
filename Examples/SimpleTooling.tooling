@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Tooling xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MachineFile>C:\Users\fcoppa\Source\Repos\TestGIT\MachineEditor\Examples\Simple3AxesCnc.xml</MachineFile>
+  <ToolsFile>C:\Users\fcoppa\Source\Repos\TestGIT\MachineEditor\Examples\SimpleToolSet.tools</ToolsFile>
+  <Units>
+    <ToolingUnit>
+      <ToolHolderId>3001</ToolHolderId>
+      <ToolName>Rout D20</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8001</ToolHolderId>
+      <ToolName>Drill D8</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8002</ToolHolderId>
+      <ToolName>Drill D8</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8003</ToolHolderId>
+      <ToolName>Drill D8</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8004</ToolHolderId>
+      <ToolName>Drill D8</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8005</ToolHolderId>
+      <ToolName>Drill D8</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8006</ToolHolderId>
+      <ToolName>Drill D8</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8007</ToolHolderId>
+      <ToolName>Drill D5</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8008</ToolHolderId>
+      <ToolName>Drill D5</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8009</ToolHolderId>
+      <ToolName>Drill D5</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8010</ToolHolderId>
+      <ToolName>Drill D5</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8011</ToolHolderId>
+      <ToolName>Drill D5</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8012</ToolHolderId>
+      <ToolName>Drill D5</ToolName>
+    </ToolingUnit>
+    <ToolingUnit>
+      <ToolHolderId>8013</ToolHolderId>
+      <ToolName>Drill D5</ToolName>
+    </ToolingUnit>
+  </Units>
+</Tooling>
