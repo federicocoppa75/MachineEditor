@@ -221,8 +221,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-80</OnPos>
-                        <TOff>500</TOff>
-                        <TOn>500</TOn>
+                        <TOff>0.5</TOff>
+                        <TOn>0.5</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>None</ToolHolderType>
@@ -264,8 +264,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -320,8 +320,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -376,8 +376,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -432,8 +432,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -488,8 +488,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -544,8 +544,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -600,8 +600,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -656,8 +656,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -712,8 +712,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -768,8 +768,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -824,8 +824,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -880,8 +880,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -936,8 +936,8 @@
                         <Direction>Z</Direction>
                         <OffPos>0</OffPos>
                         <OnPos>-60</OnPos>
-                        <TOff>200</TOff>
-                        <TOn>200</TOn>
+                        <TOff>0.2</TOff>
+                        <TOn>0.2</TOn>
                         <ToolActivator>true</ToolActivator>
                       </LinkToParentData>
                       <ToolHolderType>Static</ToolHolderType>
@@ -961,7 +961,7 @@
                   </Children>
                   <LinkToParentType>LinearPosition</LinkToParentType>
                   <LinkToParentData xsi:type="LinearPosition">
-                    <Id>3</Id>
+                    <Id>102</Id>
                     <Direction>Z</Direction>
                     <Min>-200</Min>
                     <Max>0</Max>
@@ -975,7 +975,7 @@
               </Children>
               <LinkToParentType>LinearPosition</LinkToParentType>
               <LinkToParentData xsi:type="LinearPosition">
-                <Id>2</Id>
+                <Id>101</Id>
                 <Direction>Y</Direction>
                 <Min>0</Min>
                 <Max>1400</Max>

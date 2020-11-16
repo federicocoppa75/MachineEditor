@@ -29,13 +29,13 @@
           <RequestedState>On</RequestedState>
         </BaseAction>
 	    <BaseAction xsi:type="TwoPositionLinkAction">
-          <Id>0</Id>
+          <Id>1</Id>
           <LinkId>8009</LinkId>
           <RequestedState>On</RequestedState>
         </BaseAction>	
       </Actions>
     </MachineStep>
-    <MachineStep>
+    <!--<MachineStep>
       <Id>18</Id>
       <Name>Turn On spindle</Name>
       <Description>line 63</Description>
@@ -48,7 +48,7 @@
           <Duration>1</Duration>
         </BaseAction>
       </Actions>
-    </MachineStep>
+    </MachineStep>-->
     <MachineStep>
       <Id>25</Id>
       <Name>G0</Name>
@@ -59,14 +59,14 @@
           <Name>Move X</Name>
           <LinkId>1</LinkId>
           <RequestedPosition>100</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.5</Duration>
         </BaseAction>
         <BaseAction xsi:type="LinearPositionLinkAction">
-          <Id>1</Id>
+          <Id>11</Id>
           <Name>Move Y</Name>
-          <LinkId>2</LinkId>
+          <LinkId>101</LinkId>
           <RequestedPosition>100</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.5</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>
@@ -78,9 +78,9 @@
         <BaseAction xsi:type="LinearPositionLinkAction">
           <Id>0</Id>
           <Name>Move Z</Name>
-          <LinkId>3</LinkId>
+          <LinkId>102</LinkId>
           <RequestedPosition>-160</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.2</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>
@@ -94,8 +94,8 @@
           <Name>G1 move</Name>
           <Positions>
             <PositionItem>
-              <LinkId>3</LinkId>
-              <RequestPosition>-190</RequestPosition>
+              <LinkId>102</LinkId>
+              <RequestPosition>-180</RequestPosition>
             </PositionItem>
           </Positions>
           <Duration>0.64</Duration>
@@ -110,9 +110,9 @@
         <BaseAction xsi:type="LinearPositionLinkAction">
           <Id>0</Id>
           <Name>Move Z</Name>
-          <LinkId>3</LinkId>
+          <LinkId>102</LinkId>
           <RequestedPosition>-160</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.3</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>
@@ -126,14 +126,7 @@
           <Name>Move X</Name>
           <LinkId>1</LinkId>
           <RequestedPosition>400</RequestedPosition>
-          <Duration>0</Duration>
-        </BaseAction>
-        <BaseAction xsi:type="LinearPositionLinkAction">
-          <Id>1</Id>
-          <Name>Move Y</Name>
-          <LinkId>2</LinkId>
-          <RequestedPosition>100</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.5</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>
@@ -147,8 +140,8 @@
           <Name>G1 move</Name>
           <Positions>
             <PositionItem>
-              <LinkId>3</LinkId>
-              <RequestPosition>-190</RequestPosition>
+              <LinkId>102</LinkId>
+              <RequestPosition>-180</RequestPosition>
             </PositionItem>
           </Positions>
           <Duration>0.64</Duration>
@@ -163,9 +156,9 @@
         <BaseAction xsi:type="LinearPositionLinkAction">
           <Id>0</Id>
           <Name>Move Z</Name>
-          <LinkId>3</LinkId>
+          <LinkId>102</LinkId>
           <RequestedPosition>-160</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.3</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>	
@@ -201,14 +194,14 @@
           <Name>Move X</Name>
           <LinkId>1</LinkId>
           <RequestedPosition>270</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.5</Duration>
         </BaseAction>
         <BaseAction xsi:type="LinearPositionLinkAction">
           <Id>1</Id>
           <Name>Move Y</Name>
-          <LinkId>2</LinkId>
+          <LinkId>101</LinkId>
           <RequestedPosition>300</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.5</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>	
@@ -222,7 +215,7 @@
           <Name>G1 move</Name>
           <Positions>
             <PositionItem>
-              <LinkId>3</LinkId>
+              <LinkId>102</LinkId>
               <RequestPosition>-190</RequestPosition>
             </PositionItem>
           </Positions>
@@ -238,9 +231,9 @@
         <BaseAction xsi:type="LinearPositionLinkAction">
           <Id>0</Id>
           <Name>Move Z</Name>
-          <LinkId>3</LinkId>
+          <LinkId>102</LinkId>
           <RequestedPosition>-160</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.3</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>	
@@ -254,7 +247,7 @@
           <Name>Move X</Name>
           <LinkId>1</LinkId>
           <RequestedPosition>330</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.2</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>	
@@ -268,7 +261,7 @@
           <Name>G1 move</Name>
           <Positions>
             <PositionItem>
-              <LinkId>3</LinkId>
+              <LinkId>102</LinkId>
               <RequestPosition>-190</RequestPosition>
             </PositionItem>
           </Positions>
@@ -296,9 +289,9 @@
         <BaseAction xsi:type="LinearPositionLinkAction">
           <Id>0</Id>
           <Name>Move Z</Name>
-          <LinkId>3</LinkId>
+          <LinkId>102</LinkId>
           <RequestedPosition>0</RequestedPosition>
-          <Duration>-160</Duration>
+          <Duration>0.5</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>
@@ -324,14 +317,14 @@
           <Name>Move X</Name>
           <LinkId>1</LinkId>
           <RequestedPosition>150</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.4</Duration>
         </BaseAction>
         <BaseAction xsi:type="LinearPositionLinkAction">
           <Id>1</Id>
           <Name>Move Y</Name>
-          <LinkId>2</LinkId>
+          <LinkId>101</LinkId>
           <RequestedPosition>250</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.4</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>	
@@ -343,9 +336,9 @@
         <BaseAction xsi:type="LinearPositionLinkAction">
           <Id>0</Id>
           <Name>Move Z</Name>
-          <LinkId>3</LinkId>
+          <LinkId>102</LinkId>
           <RequestedPosition>-150</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.35</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>	
@@ -359,8 +352,8 @@
           <Name>G1 move</Name>
           <Positions>
             <PositionItem>
-              <LinkId>3</LinkId>
-              <RequestPosition>-160</RequestPosition>
+              <LinkId>102</LinkId>
+              <RequestPosition>-170</RequestPosition>
             </PositionItem>
           </Positions>
           <Duration>0.64</Duration>
@@ -377,7 +370,7 @@
           <Name>G1 move</Name>
           <Positions>
             <PositionItem>
-              <LinkId>2</LinkId>
+              <LinkId>101</LinkId>
               <RequestPosition>257.5</RequestPosition>
             </PositionItem>
           </Positions>
@@ -407,7 +400,7 @@
               <TargetCoordinate>142.5</TargetCoordinate>
             </ArcComponent>
             <ArcComponent>
-              <LinkId>2</LinkId>
+              <LinkId>101</LinkId>
               <Type>Y</Type>
               <CenterCoordinate>250</CenterCoordinate>
               <TargetCoordinate>250</TargetCoordinate>
@@ -438,7 +431,7 @@
               <TargetCoordinate>150</TargetCoordinate>
             </ArcComponent>
             <ArcComponent>
-              <LinkId>2</LinkId>
+              <LinkId>101</LinkId>
               <Type>Y</Type>
               <CenterCoordinate>250</CenterCoordinate>
               <TargetCoordinate>242.5</TargetCoordinate>
@@ -469,7 +462,7 @@
               <TargetCoordinate>157.5</TargetCoordinate>
             </ArcComponent>
             <ArcComponent>
-              <LinkId>2</LinkId>
+              <LinkId>101</LinkId>
               <Type>Y</Type>
               <CenterCoordinate>250</CenterCoordinate>
               <TargetCoordinate>250</TargetCoordinate>
@@ -500,7 +493,7 @@
               <TargetCoordinate>150</TargetCoordinate>
             </ArcComponent>
             <ArcComponent>
-              <LinkId>2</LinkId>
+              <LinkId>101</LinkId>
               <Type>Y</Type>
               <CenterCoordinate>250</CenterCoordinate>
               <TargetCoordinate>257.5</TargetCoordinate>
@@ -519,7 +512,7 @@
           <Name>G1 move</Name>
           <Positions>
             <PositionItem>
-              <LinkId>3</LinkId>
+              <LinkId>102</LinkId>
               <RequestPosition>-150</RequestPosition>
             </PositionItem>
           </Positions>
@@ -537,7 +530,7 @@
           <Name>Move X</Name>
           <LinkId>1</LinkId>
           <RequestedPosition>450</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.35</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>	
@@ -551,8 +544,8 @@
           <Name>G1 move</Name>
           <Positions>
             <PositionItem>
-              <LinkId>3</LinkId>
-              <RequestPosition>-160</RequestPosition>
+              <LinkId>102</LinkId>
+              <RequestPosition>-170</RequestPosition>
             </PositionItem>
           </Positions>
           <Duration>0.64</Duration>
@@ -569,7 +562,7 @@
           <Name>G1 move</Name>
           <Positions>
             <PositionItem>
-              <LinkId>2</LinkId>
+              <LinkId>101</LinkId>
               <RequestPosition>257.5</RequestPosition>
             </PositionItem>
           </Positions>
@@ -599,7 +592,7 @@
               <TargetCoordinate>442.5</TargetCoordinate>
             </ArcComponent>
             <ArcComponent>
-              <LinkId>2</LinkId>
+              <LinkId>101</LinkId>
               <Type>Y</Type>
               <CenterCoordinate>250</CenterCoordinate>
               <TargetCoordinate>250</TargetCoordinate>
@@ -630,7 +623,7 @@
               <TargetCoordinate>450</TargetCoordinate>
             </ArcComponent>
             <ArcComponent>
-              <LinkId>2</LinkId>
+              <LinkId>101</LinkId>
               <Type>Y</Type>
               <CenterCoordinate>250</CenterCoordinate>
               <TargetCoordinate>242.5</TargetCoordinate>
@@ -661,7 +654,7 @@
               <TargetCoordinate>457.5</TargetCoordinate>
             </ArcComponent>
             <ArcComponent>
-              <LinkId>2</LinkId>
+              <LinkId>101</LinkId>
               <Type>Y</Type>
               <CenterCoordinate>250</CenterCoordinate>
               <TargetCoordinate>250</TargetCoordinate>
@@ -692,7 +685,7 @@
               <TargetCoordinate>450</TargetCoordinate>
             </ArcComponent>
             <ArcComponent>
-              <LinkId>2</LinkId>
+              <LinkId>101</LinkId>
               <Type>Y</Type>
               <CenterCoordinate>250</CenterCoordinate>
               <TargetCoordinate>257.5</TargetCoordinate>
@@ -711,7 +704,7 @@
           <Name>G1 move</Name>
           <Positions>
             <PositionItem>
-              <LinkId>3</LinkId>
+              <LinkId>102</LinkId>
               <RequestPosition>-150</RequestPosition>
             </PositionItem>
           </Positions>
@@ -739,9 +732,9 @@
         <BaseAction xsi:type="LinearPositionLinkAction">
           <Id>0</Id>
           <Name>Move Z</Name>
-          <LinkId>3</LinkId>
+          <LinkId>102</LinkId>
           <RequestedPosition>0</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.4</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>	
@@ -755,14 +748,14 @@
           <Name>Move X</Name>
           <LinkId>1</LinkId>
           <RequestedPosition>0</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.6</Duration>
         </BaseAction>
         <BaseAction xsi:type="LinearPositionLinkAction">
           <Id>1</Id>
           <Name>Move Y</Name>
-          <LinkId>2</LinkId>
+          <LinkId>101</LinkId>
           <RequestedPosition>0</RequestedPosition>
-          <Duration>0</Duration>
+          <Duration>0.6</Duration>
         </BaseAction>
       </Actions>
     </MachineStep>		
