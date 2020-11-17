@@ -11,8 +11,8 @@ This folder contains the files to simulate a simple 3 axis CNC being machined.
 * **Simple3AxesCnc.env**: working environment (contains structure, elements model, tools and tooling)
 * **antina.msteps**: example of machinary
 
-<!--[![](./images/example.JPG)](https://www.youtube.com/watch?v=u2I6zB-JCqI)-->
-![](./images/ShowExample.JPG)
+[![](./images/ShowExample.JPG)](https://www.youtube.com/watch?v=u2I6zB-JCqI)
+<!--![](./images/ShowExample.JPG)-->
 
 ## MachineEditor
 Machine editor, allows creation and modification.
