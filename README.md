@@ -12,7 +12,7 @@ This folder contains the files to simulate a simple 3 axis CNC being machined.
 * **antina.msteps**: example of machinary
 
 [![](./images/example.JPG)](https://www.youtube.com/watch?v=u2I6zB-JCqI)
-![](./images/ToolEditor.JPG)
+![](./images/example.JPG)
 
 ## MachineEditor
 Machine editor, allows creation and modification.
