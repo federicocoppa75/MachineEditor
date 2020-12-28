@@ -13,32 +13,33 @@ namespace MachineSteps.Plugins.IsoParser.Converters.M
     {
         public override List<MachineStep> Convert(MIstruction istruction, State state)
         {
-            return new List<MachineStep>
+            if(state.StopLinkTurnedOn > 0)
             {
-                new MachineStep()
-                {
-                    Id = GetStepId(),
-                    Name = "M161",
-                    Actions = new List<BaseAction>()
+                var result = new List<MachineStep>
                     {
-                        new TwoPositionLinkAction()
+                        new MachineStep()
                         {
-                            LinkId = 51,
-                            RequestedState = TwoPositionLinkActionRequestedState.Off
-                        },
-                        new TwoPositionLinkAction()
-                        {
-                            LinkId = 52,
-                            RequestedState = TwoPositionLinkActionRequestedState.Off
-                        },
-                        new TwoPositionLinkAction()
-                        {
-                            LinkId = 53,
-                            RequestedState = TwoPositionLinkActionRequestedState.Off
+                            Id = GetStepId(),
+                            Name = "M161",
+                            Actions = new List<BaseAction>()
+                            {
+                                new TwoPositionLinkAction()
+                                {
+                                    LinkId = state.StopLinkTurnedOn,
+                                    RequestedState = TwoPositionLinkActionRequestedState.Off
+                                }
+                            }
                         }
-                    }
-                }
-            };
+                    };
+
+                state.StopLinkTurnedOn = 0;
+
+                return result;
+            }
+            else
+            {
+                return base.Convert(istruction, state);
+            }
         }
     }
 }

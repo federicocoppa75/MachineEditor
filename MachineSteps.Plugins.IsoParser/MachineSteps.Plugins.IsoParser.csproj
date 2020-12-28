@@ -134,6 +134,7 @@
     <Compile Include="Converters\M\M80Converter.cs" />
     <Compile Include="Converters\M\M81Converter.cs" />
     <Compile Include="Converters\M\MTurnOnInverterConverter.cs" />
+    <Compile Include="Converters\M\MTurnOnStopConverter.cs" />
     <Compile Include="Converters\M\MTwoStateIstructionForUnitBaseConverter.cs" />
     <Compile Include="Converters\SIstructionConverter.cs" />
     <Compile Include="Converters\State.cs" />

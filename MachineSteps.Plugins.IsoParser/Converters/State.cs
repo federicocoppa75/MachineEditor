@@ -36,5 +36,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters
         public int FeedSpeed { get; set; }
 
         public ToolChange ToolChange { get; set; } = new ToolChange();
+
+        public int StopLinkTurnedOn { get; set; }
     }
 }
