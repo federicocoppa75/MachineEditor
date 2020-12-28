@@ -161,10 +161,6 @@
       <Project>{f5e266dd-de52-42ac-b9e9-e366065f7f50}</Project>
       <Name>MachineSteps.Plugins.IsoConverterBase</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MachineSteps.Plugins.IsoInterpreter\MachineSteps.Plugins.IsoInterpreter.csproj">
-      <Project>{49b4ab8a-7308-48ca-bc91-2d6890f5a5cf}</Project>
-      <Name>MachineSteps.Plugins.IsoInterpreter</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MachineSteps.Plugins.IsoIstructions\MachineSteps.Plugins.IsoIstructions.csproj">
       <Project>{42707A57-AFFD-495D-B54E-92CE4EC54431}</Project>
       <Name>MachineSteps.Plugins.IsoIstructions</Name>
