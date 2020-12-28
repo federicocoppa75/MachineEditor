@@ -1,93 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{63A9DB57-6D03-48C4-A37F-BDF5965376C3}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MachineModels</RootNamespace>
-    <AssemblyName>MachineModels</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.0</Version>
+    <Authors>MachineModels</Authors>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Enums\ActivatorType.cs" />
-    <Compile Include="Enums\ColliderGeometry.cs" />
-    <Compile Include="Enums\ColliderType.cs" />
-    <Compile Include="Enums\InserterType.cs" />
-    <Compile Include="Enums\LinkDirection.cs" />
-    <Compile Include="Enums\LinkType.cs" />
-    <Compile Include="Enums\PanelLoadType.cs" />
-    <Compile Include="Enums\ToolHolderType.cs" />
-    <Compile Include="Enums\ToolLinkType.cs" />
-    <Compile Include="Enums\ToolType.cs" />
-    <Compile Include="Models\Colliders\Collider.cs" />
-    <Compile Include="Models\Colliders\PointsCollider.cs" />
-    <Compile Include="Models\Color.cs" />
-    <Compile Include="Models\Inserters\BaseInserter.cs" />
-    <Compile Include="Models\Inserters\Injector.cs" />
-    <Compile Include="Models\Inserters\Inserter.cs" />
-    <Compile Include="Models\Links\DynamicLink.cs" />
-    <Compile Include="Models\Links\RotaryPneumatic.cs" />
-    <Compile Include="Models\Links\ILink.cs" />
-    <Compile Include="Models\Links\LinearPneumatic.cs" />
-    <Compile Include="Models\Links\LinearPosition.cs" />
-    <Compile Include="Models\Links\Link.cs" />
-    <Compile Include="Models\Links\TwoPositionsLink.cs" />
-    <Compile Include="Models\MachineElement.cs" />
-    <Compile Include="Models\Matrix3D.cs" />
-    <Compile Include="Models\PanelHolders\PanelHolder.cs" />
-    <Compile Include="Models\ToolHolders\AutoSinkToolHolder.cs" />
-    <Compile Include="Models\ToolHolders\AutoSourceToolHolder.cs" />
-    <Compile Include="Models\ToolHolders\ExpandableObjectAttribute.cs" />
-    <Compile Include="Models\ToolHolders\IToolHolder.cs" />
-    <Compile Include="Models\ToolHolders\StaticToolHolder.cs" />
-    <Compile Include="Models\ToolHolders\ToolHolder.cs" />
-    <Compile Include="Models\Tooling\Tooling.cs" />
-    <Compile Include="Models\Tooling\ToolingUnit.cs" />
-    <Compile Include="Models\Tools\CountersinkTool.cs" />
-    <Compile Include="Models\Tools\DiskOnConeTool.cs" />
-    <Compile Include="Models\Tools\DiskTool.cs" />
-    <Compile Include="Models\Tools\PointedTool.cs" />
-    <Compile Include="Models\Tools\SimpleTool.cs" />
-    <Compile Include="Models\Tools\Tool.cs" />
-    <Compile Include="Models\Tools\ToolSet.cs" />
-    <Compile Include="Models\Tools\TwoSectionTool.cs" />
-    <Compile Include="Models\Vector.cs" />
-    <Compile Include="Models\WorkActivator\AnalogicActivator.cs" />
-    <Compile Include="Models\WorkActivator\BaseActivator.cs" />
-    <Compile Include="Models\WorkActivator\DigitalActivator.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
