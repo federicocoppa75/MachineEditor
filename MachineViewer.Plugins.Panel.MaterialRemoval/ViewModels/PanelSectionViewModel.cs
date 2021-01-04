@@ -31,7 +31,7 @@ namespace MachineViewer.Plugins.Panel.MaterialRemoval.ViewModels
 
             public void ExeAndReset(Action<List<Point3D>, List<int>> action)
             {
-                if(!_queue.IsEmpty &&  _queue.TryDequeue(out Tuple<List<Point3D>, List<int>> t))
+                if (!_queue.IsEmpty && _queue.TryDequeue(out Tuple<List<Point3D>, List<int>> t))
                 {
                     action(t.Item1, t.Item2);
                 }
@@ -84,6 +84,40 @@ namespace MachineViewer.Plugins.Panel.MaterialRemoval.ViewModels
 
         public double SizeZ { get; set; }
 
+        public Model3D FilterBox
+        {
+            get
+            {
+                var filterBox = new Rect3D(_filterBox.Min.x, _filterBox.Min.y, _filterBox.Min.z, _filterBox.Width, _filterBox.Height, _filterBox.Depth);
+                var builder = new MeshBuilder();
+
+                builder.AddBoundingBox(filterBox, 0.2);
+
+                return new GeometryModel3D()
+                {
+                    Geometry = builder.ToMesh(),
+                    Material = MaterialHelper.CreateMaterial(Colors.Cyan)
+                };
+            }
+        }
+
+        public Model3D BoundingBox
+        {
+            get
+            {
+                var box = new Rect3D(Center.X - SizeX / 2.0, Center.Y - SizeY / 2.0, Center.Z - SizeZ / 2.0, SizeX, SizeY, SizeZ);
+                var builder = new MeshBuilder();
+
+                builder.AddBoundingBox(box, 0.1);
+
+                return new GeometryModel3D()
+                {
+                    Geometry = builder.ToMesh(),
+                    Material = MaterialHelper.CreateMaterial(Colors.Brown)
+                };
+            }
+        }
+
         private int _numcells;
         public int NumCells
         {
@@ -127,7 +161,7 @@ namespace MachineViewer.Plugins.Panel.MaterialRemoval.ViewModels
         {
             InitializeCubeSize();
 
-            _filterBox = new AxisAlignedBox3d(_min, _max);            
+            _filterBox = new AxisAlignedBox3d(_min, _max);
             _filterBox.Max.x -= _cubeSize / 2.0;
             _filterBox.Max.y -= _cubeSize / 2.0;
         }

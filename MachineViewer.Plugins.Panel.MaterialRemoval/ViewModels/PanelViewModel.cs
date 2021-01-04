@@ -80,6 +80,9 @@ namespace MachineViewer.Plugins.Panel.MaterialRemoval.ViewModels
 
                     Sections.Add(section);
                     panelModel.Children.Add(section.Model);
+
+                    //panelModel.Children.Add(section.FilterBox);
+                    //panelModel.Children.Add(section.BoundingBox);
                 }
             }
 
@@ -91,6 +94,39 @@ namespace MachineViewer.Plugins.Panel.MaterialRemoval.ViewModels
             const int sectionsX100mm = 3;
             _nxSection = (int)Math.Ceiling(SizeX / 100.0) * sectionsX100mm;
             _nySection = (int)Math.Ceiling(SizeY / 100.0) * sectionsX100mm;
+
+            ImproveSectionsNumber();
+        }
+
+        private void ImproveSectionsNumber()
+        {
+            var xSize = SizeX / _nxSection;
+            var ySize = SizeY / _nySection;
+
+            if(Math.Abs(xSize - ySize) > 0.01)
+            {
+                if(xSize > ySize)
+                {
+                    ImproveSectionsNumber(ySize, SizeX, ref _nxSection);
+                }
+                else
+                {
+                    ImproveSectionsNumber(xSize, SizeY, ref _nySection);
+                }
+            }
+        }
+
+        private static void ImproveSectionsNumber(double refSecSize, double size, ref int n)
+        {
+            var secSize = size / n;
+
+            while(secSize >= refSecSize)
+            {
+                n++;
+                secSize = size / n;
+            }
+
+            n--;
         }
 
         private PanelSectionViewModel CreatePanelSection(Point3D center, double xSectionSize, double ySectionSize, int i, int j)
