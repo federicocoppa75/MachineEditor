@@ -118,15 +118,12 @@ namespace MachineViewer.Plugins.Panel.MaterialRemoval.ViewModels
 
         private static void ImproveSectionsNumber(double refSecSize, double size, ref int n)
         {
-            var secSize = size / n;
+            while ((size / n) >= refSecSize) n++;
 
-            while(secSize >= refSecSize)
-            {
-                n++;
-                secSize = size / n;
-            }
+            var v1 = Math.Abs((size / n) - refSecSize);
+            var v2 = Math.Abs((size / (n - 1)) - refSecSize);
 
-            n--;
+            if (v1 > v2) n--;
         }
 
         private PanelSectionViewModel CreatePanelSection(Point3D center, double xSectionSize, double ySectionSize, int i, int j)
