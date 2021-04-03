@@ -14,6 +14,7 @@ namespace MachineModels.Models.Tools
     [XmlInclude(typeof(TwoSectionTool))]
     [XmlInclude(typeof(CountersinkTool))]
     [XmlInclude(typeof(DiskOnConeTool))]
+    [XmlInclude(typeof(AngolarTransmission))]
     [Serializable]
     public abstract class Tool
     {

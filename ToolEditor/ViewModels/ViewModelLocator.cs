@@ -28,6 +28,7 @@ namespace ToolEditor.ViewModels
             SimpleIoc.Default.Register<DiskToolViewModel>();
             SimpleIoc.Default.Register<CountersinkViewModel>();
             SimpleIoc.Default.Register<DiskOnConeToolViewModel>();
+            SimpleIoc.Default.Register<AngolarTransmissionViewModel>();
         }
 
         public MainViewModel Main => IsInDesignMode ? DummyMainViewModel : SimpleIoc.Default.GetInstance<MainViewModel>();
@@ -39,6 +40,7 @@ namespace ToolEditor.ViewModels
         public DiskToolViewModel DiskTool => IsInDesignMode ? DummyDiskToolViewModel : SimpleIoc.Default.GetInstance<DiskToolViewModel>();
         public CountersinkViewModel CountersinkTool => IsInDesignMode ? DummyCountersinkToolViewModel : SimpleIoc.Default.GetInstance<CountersinkViewModel>();
         public DiskOnConeToolViewModel DiskOnConeTool => IsInDesignMode ? DummyDiskOnConeToolViewModel : SimpleIoc.Default.GetInstance<DiskOnConeToolViewModel>();
+        public AngolarTransmissionViewModel AngolarTransmission => IsInDesignMode ? DummyAngolarTransmissionViewModel : SimpleIoc.Default.GetInstance<AngolarTransmissionViewModel>();
 
         #region Dummy models
 
@@ -197,6 +199,18 @@ namespace ToolEditor.ViewModels
                     Name = "Base tool",
                     Description = "Description of base tool",
                     ToolLinkType = MachineModels.Enums.ToolLinkType.Static
+                };
+            }
+        }
+
+        public AngolarTransmissionViewModel DummyAngolarTransmissionViewModel
+        {
+            get
+            {
+                return new AngolarTransmissionViewModel()
+                {
+                    Name = "AngolarTransmission",
+                    Description = "Simpmle angular transmission",
                 };
             }
         }

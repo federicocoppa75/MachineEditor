@@ -43,6 +43,10 @@
             <local:DiskOnConeToolView/>
         </DataTemplate>
 
+        <DataTemplate x:Key="angolarTransmissionDataTemplate">
+            <local:AngolarTransmissionView/>
+        </DataTemplate>
+
         <Style x:Key="selectableContentControlStyle" TargetType="ContentControl">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ToolType}" Value="None">
@@ -71,6 +75,9 @@
                 </DataTrigger>
                 <DataTrigger Binding="{Binding ToolType}" Value="DiskOnCone">
                     <Setter Property="ContentTemplate" Value="{StaticResource diskOnConeDataTemplate}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ToolType}" Value="AngularTransmission">
+                    <Setter Property="ContentTemplate" Value="{StaticResource angolarTransmissionDataTemplate}"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>

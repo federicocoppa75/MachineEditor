@@ -23,6 +23,7 @@
                 <MenuItem Header="Disk" Command="{Binding AddDiskTool}"/>
                 <MenuItem Header="Countersink" Command="{Binding AddCountersinkTool}"/>
                 <MenuItem Header="Disk on cone" Command="{Binding AddDiskOnConeTool}"/>
+                <MenuItem Header="Angular transmission" Command="{Binding AddAngularTransmission}"/>
             </MenuItem>
         </Menu>
 

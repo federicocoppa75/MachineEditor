@@ -82,6 +82,9 @@ namespace ToolEditor.ViewModels
                         case ToolType.DiskOnCone:
                             Messenger.Default.Send(new SelectedToolChanged<DiskOnConeTool>() { Tool = Tool as DiskOnConeTool });
                             break;
+                        case ToolType.AngularTransmission:
+                            Messenger.Default.Send(new SelectedToolChanged<AngolarTransmission>() { Tool = Tool as AngolarTransmission });
+                            break;
                          default:
                             break;
                     }
@@ -133,6 +136,9 @@ namespace ToolEditor.ViewModels
                         break;
                     case ToolType.DiskOnCone:
                         Messenger.Default.Send(msg.DownCast<DiskOnConeTool>());
+                        break;
+                    case ToolType.AngularTransmission:
+                        Messenger.Default.Send(msg.DownCast<AngolarTransmission>());
                         break;
                     default:
                         break;

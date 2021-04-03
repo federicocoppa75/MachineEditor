@@ -82,7 +82,8 @@ namespace ToolEditor.ViewModels
 
             UpdateViewModel();
 
-            Messenger.Default.Register<ToolModelDataChanged>(this, OnDataChanged);
+            MessengerInstance.Register<ToolModelDataChanged>(this, OnDataChanged);
+            MessengerInstance.Register<GetToolMessage>(this, OnGetToolMessage);
         }
 
         private void OnDataChanged(ToolModelDataChanged msg)
@@ -90,6 +91,14 @@ namespace ToolEditor.ViewModels
             if(ReferenceEquals(_tool, msg.Tool))
             {
                 UpdateViewModel();
+            }
+        }
+
+        private void OnGetToolMessage(GetToolMessage msg)
+        {
+            if(string.Compare(Name, msg.Name) == 0)
+            {
+                msg.SetTool(_tool);
             }
         }
 

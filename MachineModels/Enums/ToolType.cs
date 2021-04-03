@@ -18,6 +18,7 @@ namespace MachineModels.Enums
         BullNoseConvex,
         Composed,
         Countersink,
-        DiskOnCone
+        DiskOnCone,
+        AngularTransmission
     }
 }

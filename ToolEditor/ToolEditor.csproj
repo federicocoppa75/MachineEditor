@@ -94,9 +94,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Messages\GetToolMessage.cs" />
     <Compile Include="Messages\SelectedToolChanged.cs" />
     <Compile Include="Messages\ToolModelDataChanged.cs" />
     <Compile Include="Messages\ToolViewReady.cs" />
+    <Compile Include="ViewModels\AngolarTransmissionViewModel.cs" />
     <Compile Include="ViewModels\CountersinkViewModel.cs" />
     <Compile Include="ViewModels\DiskOnConeToolViewModel.cs" />
     <Compile Include="ViewModels\DiskToolViewModel.cs" />
@@ -108,6 +110,9 @@
     <Compile Include="ViewModels\ToolViewModel.cs" />
     <Compile Include="ViewModels\TwoSectionToolViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\AngolarTransmissionView.xaml.cs">
+      <DependentUpon>AngolarTransmissionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BaseToolView.xaml.cs">
       <DependentUpon>BaseToolView.xaml</DependentUpon>
     </Compile>
@@ -150,6 +155,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AngolarTransmissionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BaseToolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

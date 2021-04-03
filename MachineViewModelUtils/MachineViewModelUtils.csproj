@@ -52,6 +52,7 @@
     <Compile Include="Extensions\Media3DExtensions.cs" />
     <Compile Include="Extensions\ModelElementDataExtension.cs" />
     <Compile Include="Extensions\Point3DExtensions.cs" />
+    <Compile Include="Extensions\Vector3DExtension.cs" />
     <Compile Include="Helpers\ToolsMeshHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -59,6 +59,8 @@ namespace ToolEditor.ViewModels
         private ICommand _addDiskOnConeTool;
         public ICommand AddDiskOnConeTool => _addDiskOnConeTool ?? (_addDiskOnConeTool = new RelayCommand(() => AddDiskOnConeToolImpl()));
 
+        private ICommand _addAngularTransmission;
+        public ICommand AddAngularTransmission => _addAngularTransmission ?? (_addAngularTransmission = new RelayCommand(() => AddAngularTransmissionImpl()));
 
         private void OpenFileImpl()
         {
@@ -176,6 +178,11 @@ namespace ToolEditor.ViewModels
                 PostponemntDiameter = 10.0,
                 PostponemntLength = 104.0
             });
+        }
+
+        private void AddAngularTransmissionImpl()
+        {
+            AddBaseTool(new AngolarTransmission());
         }
 
         private void AddBaseTool(Tool tool)
