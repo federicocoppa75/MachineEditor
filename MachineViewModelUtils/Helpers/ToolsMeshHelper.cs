@@ -193,5 +193,20 @@ namespace MachineViewModelUtils.Helpers
 
             return m.GetMeshGeometry3D();
         }
+
+        public static ModelVisual3D GetModelFromFile(string modelFile, Point3D position, Func<MeshGeometryVisual3D> visual3DFactory = null)
+        {
+            var atg = LoadModelMeshGeometry(modelFile);
+            var atm = (visual3DFactory != null) ? visual3DFactory() : new MeshGeometryVisual3D();
+            var tr = new TranslateTransform3D() { OffsetX = position.X, OffsetY = position.Y, OffsetZ = position.Z };
+
+            atm.MeshGeometry = atg;
+            atm.Material = Materials.DarkGray;
+            atm.Fill = Brushes.DimGray;
+
+            atm.Transform = tr;
+
+            return atm;
+        }
     }
 }

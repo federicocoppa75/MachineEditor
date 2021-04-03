@@ -8,6 +8,7 @@
     <Company>FC75</Company>
     <AssemblyVersion>1.1.0.2</AssemblyVersion>
     <FileVersion>1.1.0.2</FileVersion>
+    <RepositoryUrl>https://github.com/federicocoppa75/MachineEditor</RepositoryUrl>
   </PropertyGroup>
 
 </Project>

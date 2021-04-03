@@ -118,6 +118,7 @@
     <Compile Include="Messages\Tooling\CompleteToolLoadingMessage.cs" />
     <Compile Include="Messages\Panel\GetPanelPositionMessage.cs" />
     <Compile Include="Messages\Panel\HookPanelMessage.cs" />
+    <Compile Include="Messages\Tooling\LoadAngolarTransmissionMessage.cs" />
     <Compile Include="Messages\Tooling\LoadToolMessage.cs" />
     <Compile Include="Messages\Probing\AddPointDistanceProbeMessage.cs" />
     <Compile Include="Messages\Probing\AddProbeMessage.cs" />

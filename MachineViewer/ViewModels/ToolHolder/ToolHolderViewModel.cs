@@ -8,6 +8,7 @@ using MachineViewer.Messages.MaterialRemoval;
 using MachineViewer.Messages.Tooling;
 using MachineViewer.Plugins.Panel.MaterialRemoval.Extensions;
 using MachineViewer.Plugins.Panel.MaterialRemoval.Models;
+using MachineViewModelUtils.Extensions;
 using MachineViewModelUtils.Helpers;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace MachineViewer.ViewModels.ToolHolder
         private Transform3D _chainTransform;
 
         protected Tool _tool;
+        protected Tool _subTool;
 
         public abstract ToolHolderType ToolHolderType { get; }
 
@@ -39,9 +41,21 @@ namespace MachineViewer.ViewModels.ToolHolder
         public ToolHolderViewModel() : base()
         {
             Messenger.Default.Register<LoadToolMessage>(this, OnLoadTool);
+            Messenger.Default.Register<LoadAngolarTransmissionMessage>(this, OnLoadAngolarTransmissionMessage);
             Messenger.Default.Register<UnloadToolMessage>(this, OnUnloadTool);
             Messenger.Default.Register<GetActiveToolMessage>(this, OnGetActiveToolMessage);
             Messenger.Default.Register<GetActiveRoutToolMessage>(this, OnGetActiveRoutToolMessage);
+        }
+
+        private void OnLoadAngolarTransmissionMessage(LoadAngolarTransmissionMessage msg)
+        {
+            if (msg.ToolHolderId == ToolHolderId)
+            {
+                Children.Add(GetAngolarTransmissionModel(msg.Tool as AngolarTransmission, msg.SubTool));
+                ToolName = msg.Tool.Name;
+                _tool = msg.Tool;
+                _subTool = msg.SubTool;
+            }
         }
 
         private void OnUnloadTool(UnloadToolMessage msg)
@@ -49,6 +63,7 @@ namespace MachineViewer.ViewModels.ToolHolder
             Children.Clear();
             ToolName = string.Empty;
             _tool = null;
+            _subTool = null;
         }
 
         private void OnLoadTool(LoadToolMessage msg)
@@ -138,6 +153,45 @@ namespace MachineViewer.ViewModels.ToolHolder
             if (mv == null) throw new NotImplementedException();
 
             if (mv is MachineElementViewModel mevm) mevm.Name = tool.Name;
+
+            return mv;
+        }
+
+        private ModelVisual3D GetAngolarTransmissionModel(AngolarTransmission angolarTransmission, Tool tool)
+        {
+            ModelVisual3D mv = new HelixToolkit.Wpf.MeshGeometryVisual3D();
+            ModelVisual3D tmv = null;
+            var tr = new TranslateTransform3D() { OffsetX = Position.X, OffsetY = Position.Y, OffsetZ = Position.Z };
+            var position = angolarTransmission.Position.ToPoint3D();
+            var direction = angolarTransmission.Direction.ToVector3D();
+
+            mv.Children.Add(ToolsMeshHelper.GetModelFromFile(angolarTransmission.BodyModelFile, new Point3D()));
+
+            mv.Transform = tr;
+
+            switch (tool.ToolType)
+            {
+                case ToolType.Simple:
+                    tmv = ToolsMeshHelper.GetSimpleModel(tool, position, direction);
+                    break;
+                case ToolType.TwoSection:
+                    tmv = ToolsMeshHelper.GetTwoSectionModel(tool, position, direction);
+                    break;
+                case ToolType.Pointed:
+                    tmv = ToolsMeshHelper.GetPointedModel(tool, position, direction);
+                    break;
+                case ToolType.Disk:
+                    tmv = ToolsMeshHelper.GetDiskModel(tool, position, direction);
+                    break;
+                case ToolType.Countersink:
+                    tmv = ToolsMeshHelper.GetCountersinkModel(tool, position, direction);
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (tmv != null) mv.Children.Add(tmv);
 
             return mv;
         }
