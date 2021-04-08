@@ -19,6 +19,7 @@ namespace MachineModels.Enums
         Composed,
         Countersink,
         DiskOnCone,
-        AngularTransmission
+        AngularTransmission,
+        AngularTransmissionImpl
     }
 }

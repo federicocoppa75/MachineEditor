@@ -98,6 +98,7 @@
     <Compile Include="Messages\SelectedToolChanged.cs" />
     <Compile Include="Messages\ToolModelDataChanged.cs" />
     <Compile Include="Messages\ToolViewReady.cs" />
+    <Compile Include="ViewModels\AngolarTransmissionSubspindleViewModel.cs" />
     <Compile Include="ViewModels\AngolarTransmissionViewModel.cs" />
     <Compile Include="ViewModels\CountersinkViewModel.cs" />
     <Compile Include="ViewModels\DiskOnConeToolViewModel.cs" />

@@ -70,6 +70,10 @@ namespace MachineModels.IO
                     {
                         // log error
                     }
+                    else if (!AddBodyModelsFilesToArchive(toolSet, archive))
+                    {
+                        // log error
+                    }
                     else if(!AddToolsetFileToArchive(toolSet, archive))
                     {
                         // log error
@@ -206,6 +210,11 @@ namespace MachineModels.IO
                 if (!string.IsNullOrEmpty(item.ConeModelFile))
                 {
                     item.ConeModelFile = $"{extractPath}\\{item.ConeModelFile}";
+                }
+
+                if((item is AngolarTransmission at) && !string.IsNullOrEmpty(at.BodyModelFile))
+                {
+                    at.BodyModelFile = $"{extractPath}\\{at.BodyModelFile}";
                 }
             }
 
@@ -418,6 +427,32 @@ namespace MachineModels.IO
             return result;
         }
 
+        private bool AddBodyModelsFilesToArchive(ToolSet toolSet, ZipArchive archive)
+        {
+            bool result = true;
+
+            foreach (var item in toolSet.Tools)
+            {
+                if ((item is AngolarTransmission at) && !string.IsNullOrEmpty(at.BodyModelFile))
+                {
+                    FileInfo info = new FileInfo(at.BodyModelFile);
+
+                    if (info.Exists)
+                    {
+                        var name = info.Name;
+
+                        if (!_entrieeNames.Contains(name))
+                        {
+                            var entry = archive.CreateEntryFromFile(at.BodyModelFile, name);
+                            _entrieeNames.Add(name);
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
         private void FilterModelsNames(ToolSet toolSet)
         {
             foreach (var item in toolSet.Tools)
@@ -426,6 +461,12 @@ namespace MachineModels.IO
                 {
                     var info = new FileInfo(item.ConeModelFile);
                     item.ConeModelFile = info.Name;
+                }
+
+                if((item is AngolarTransmission at) && !string.IsNullOrEmpty(at.BodyModelFile))
+                {
+                    var info = new FileInfo(at.BodyModelFile);
+                    at.BodyModelFile = info.Name;
                 }
             }
         }

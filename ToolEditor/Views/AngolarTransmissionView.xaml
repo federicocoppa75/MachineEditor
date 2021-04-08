@@ -30,10 +30,9 @@
 
         <helix:HelixViewport3D Name="viewPort" Grid.Column="2" Background="{helix:LinearGradientBrush Gray, White}" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True">
             <helix:DefaultLights/>
-            <!--<helix:MeshGeometryVisual3D MeshGeometry="{Binding Geometry}" Fill="Gray"/>-->
             <helix:MeshGeometryVisual3D MeshGeometry="{Binding BodyGeometry}" Fill="DarkGray"/>
-            <helix:MeshGeometryVisual3D MeshGeometry="{Binding ToolGeometry}" Fill="Blue"/>
             <helix:MeshGeometryVisual3D MeshGeometry="{Binding SpindleGeometry}" Fill="Red"/>
+            <ModelVisual3D Content="{Binding ToolGeometry}"/>
         </helix:HelixViewport3D>
     </Grid>
 </UserControl>

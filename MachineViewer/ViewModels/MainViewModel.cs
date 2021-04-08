@@ -411,14 +411,11 @@ namespace MachineViewer.ViewModels
                 {
                     if(tool.ToolType == ToolType.AngularTransmission)
                     {
-                        if(td.TryGetValue((tool as AngolarTransmission).ToolName, out Tool subTool))
-                        {
-                            Messenger.Default.Send(new LoadAngolarTransmissionMessage() { ToolHolderId = item.ToolHolderId, Tool = tool, SubTool = subTool });
-                        }
-                        else
-                        {
-                            throw new ArgumentException();
-                        }
+                        Messenger.Default.Send(new LoadToolMessage() 
+                        { 
+                            ToolHolderId = item.ToolHolderId, 
+                            Tool = (tool as AngolarTransmission).ToImplementation(td) 
+                        });
                     }
                     else
                     {

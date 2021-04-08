@@ -8,6 +8,10 @@ using System.Windows.Media.Media3D;
 using ToolEditor.Views;
 using MachineViewModelUtils.Extensions;
 using ToolEditor.Messages;
+using System.Collections.Generic;
+using System.Windows.Media;
+using HelixToolkit.Wpf;
+using System;
 
 namespace ToolEditor.ViewModels
 {
@@ -29,56 +33,26 @@ namespace ToolEditor.ViewModels
             }
         }
 
-        private string _toolName = string.Empty;
-        [Category("Sub spindle")]
-        public string ToolName 
-        { 
-            get => _toolName;
-            set
-            {
-                if (Set(ref _toolName, value, nameof(ToolName)))
-                {
-                    MessengerInstance.Send(new GetToolMessage() { Name = ToolName, SetTool = (t) => UpdateToolGeometry(t) });
-                }
-            }
-        }
-
-        private Point3D _position = new Point3D();
-        [Category("Sub spindle")]
-        public Point3D Position 
-        { 
-            get => _position;
-            set
-            {
-                if (Set(ref _position, value, nameof(Position)))
-                {
-                    UpdateSpindleGeometry();
-                }
-            }
-        }
-
-        private Vector3D _direction = new Vector3D();
-        [Category("Sub spindle")]
-        public Vector3D Direction 
-        { 
-            get => _direction;
-            set
-            {
-                if (Set(ref _direction, value, nameof(Direction)))
-                {
-                    UpdateSpindleGeometry();
-                }
-            }
-        }
+        [Category("Sub spindles")]
+        public ObservableCollection<AngolarTransmissionSubspindleViewModel> Subspindles { get; set; } = new ObservableCollection<AngolarTransmissionSubspindleViewModel>();
 
         [Browsable(false)]
         public MeshGeometry3D BodyGeometry { get; set; }
 
         [Browsable(false)]
-        public MeshGeometry3D ToolGeometry { get; set; }
+        //public MeshGeometry3D ToolGeometry { get; set; }
+        public Model3D ToolGeometry { get; set; }
 
         [Browsable(false)]
         public MeshGeometry3D SpindleGeometry { get; set; }
+
+        public AngolarTransmissionViewModel()
+        {
+            Subspindles.CollectionChanged += (s, e) => 
+            {
+                if(!_fromModelToView) UpdateSubspindlesViewModel();
+            }; 
+        }
 
         private void UpdateBodyGeometry()
         {
@@ -97,38 +71,77 @@ namespace ToolEditor.ViewModels
 
         private void UpdateSpindleGeometry()
         {
-            var builder = new HelixToolkit.Wpf.MeshBuilder();
-            var p1 = Position;
-            var p2 = Position + (Vector3D)(Direction * 20.0);
+            if(Subspindles.Count > 0)
+            {
+                var builder = new HelixToolkit.Wpf.MeshBuilder();
 
-            builder.AddArrow(p1, p2, 6.0, 2.0);
-            SpindleGeometry = builder.ToMesh();
-            RaisePropertyChanged(nameof(SpindleGeometry));
+                foreach (var item in Subspindles)
+                {
+                    var p1 = item.Position;
+                    var p2 = item.Position + (Vector3D)(item.Direction * 20.0);
+                    builder.AddArrow(p1, p2, 6.0, 2.0);
+                }
+
+                SpindleGeometry = builder.ToMesh();
+                RaisePropertyChanged(nameof(SpindleGeometry));
+            }
+            else
+            {
+                SpindleGeometry = null;
+            }
         }
 
-        private void UpdateToolGeometry(Tool tool)
+        private void UpdateToolGeometry()
         {
-            if(tool != null)
+            if(Subspindles.Count > 0)
             {
-                var len = tool.GetTotalLength();
-                var dia = tool.GetTotalDiameter();
+                var modelGroup = new Model3DGroup();
 
-                var builder = new HelixToolkit.Wpf.MeshBuilder();
-                var p1 = Position;
-                var p2 = Position + (Vector3D)(Direction * len);
+                foreach (var item in Subspindles)
+                {
+                    MessengerInstance.Send(new GetToolMessage()
+                    {
+                        Name = item.ToolName,
+                        SetTool = (t) => 
+                        {
+                            var meshGeo3D = GetToolModel(t, item.Position, item.Direction);
 
-                builder.AddCylinder(p1, p2, dia / 2.0, 32, true, true);
-                ToolGeometry = builder.ToMesh();
+                            modelGroup.Children.Add(new GeometryModel3D()
+                            {
+                                Geometry = meshGeo3D,
+                                Material = MaterialHelper.CreateMaterial(Colors.Blue),
+                                BackMaterial = MaterialHelper.CreateMaterial(Colors.Blue)
+                            });
+                        }
+                    });
+                }
+
+                ToolGeometry = modelGroup;
                 RaisePropertyChanged(nameof(ToolGeometry));
             }
         }
 
+        private MeshGeometry3D GetToolModel(Tool t, Point3D position, Vector3D direction)
+        {
+            switch (t.ToolType)
+            {
+                case ToolType.Simple:
+                    return ToolsMeshHelper.GetSimpleMesh(t, position, direction);
+                case ToolType.TwoSection:
+                    return ToolsMeshHelper.GetTwoSectioMesh(t, position, direction);
+                case ToolType.Pointed:
+                    return ToolsMeshHelper.GetPointedMesh(t, position, direction);
+                case ToolType.Disk:
+                    return ToolsMeshHelper.GetDiskMesh(t, position, direction);
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+
         protected override void UpdateModel(AngolarTransmission tool)
         {
             tool.BodyModelFile = BodyModelFile;
-            tool.ToolName = ToolName;
-            tool.Position = Position.ToVector();
-            tool.Direction = Direction.ToVector();
 
             base.UpdateModel(tool);
         }
@@ -136,18 +149,51 @@ namespace ToolEditor.ViewModels
         protected override void UpdateViewModel()
         {
             BodyModelFile = _tool.BodyModelFile;
-            ToolName = _tool.ToolName;
-            Position = _tool.Position.ToPoint3D();
-            Direction = _tool.Direction.ToVector3D();
+            UpdateSubspindlesModel();
 
             base.UpdateViewModel();
         }
 
-        protected override MeshGeometry3D GetGeometry()
-        {
-            return base.GetGeometry();
-        }
+        protected override MeshGeometry3D GetGeometry() => base.GetGeometry();
 
         protected override ToolType ToolType => ToolType.AngularTransmission;
+
+        private void UpdateSubspindlesViewModel()
+        {
+            var at = _tool as AngolarTransmission;
+
+            at.Subspindles.Clear();
+
+            foreach (var item in Subspindles)
+            {
+                at.Subspindles.Add(new AngolarTransmission.Subspindle()
+                {
+                    ToolName = item.ToolName,
+                    Position = item.Position.ToVector(),
+                    Direction = item.Direction.ToVector()
+                });
+            }
+
+            UpdateSpindleGeometry();
+            UpdateToolGeometry();
+        }
+
+        private void UpdateSubspindlesModel()
+        {
+            Subspindles.Clear();
+
+            foreach (var item in (_tool as AngolarTransmission).Subspindles)
+            {
+                Subspindles.Add(new AngolarTransmissionSubspindleViewModel()
+                {
+                    ToolName = item.ToolName,
+                    Position = item.Position.ToPoint3D(),
+                    Direction = item.Direction.ToVector3D()
+                });
+            }
+
+            UpdateSpindleGeometry();
+            UpdateToolGeometry();
+        }
     }
 }

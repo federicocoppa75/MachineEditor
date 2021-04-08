@@ -49,6 +49,61 @@ namespace MachineViewModelUtils.Helpers
              return GetToolModel(tool, position, direction, GetDiskOnConeMesh, visual3DFactory);
         }
 
+        public static ModelVisual3D GetAngolarTransmissionModell(Tool tool, Point3D position, Vector3D direction, Func<string, MeshGeometryVisual3D> visual3DFactory = null)
+        {
+            var ati = tool as AngolarTransmissionImpl;
+            var modelGroup = new Model3DGroup();
+
+            if(System.IO.File.Exists(ati.BodyModelFile))
+            {
+                var bodyGeometry = ToolsMeshHelper.LoadModelMeshGeometry(ati.BodyModelFile);
+
+                modelGroup.Children.Add(new GeometryModel3D()
+                {
+                    Geometry = bodyGeometry,
+                    Material = MaterialHelper.CreateMaterial(Colors.DimGray),
+                    BackMaterial = MaterialHelper.CreateMaterial(Colors.DimGray)
+                });
+            }
+
+            foreach (var item in ati.Subspindles)
+            {
+                modelGroup.Children.Add(new GeometryModel3D()
+                {
+                    Geometry = GetToolGeometry(item.Tool, item.Position.ToPoint3D(), item.Direction.ToVector3D()),
+                    Material = MaterialHelper.CreateMaterial(Colors.Blue),
+                    BackMaterial = MaterialHelper.CreateMaterial(Colors.Blue)
+                });
+            }
+
+            return new ModelVisual3D() 
+            { 
+                Content = modelGroup,
+                Transform = new TranslateTransform3D(position.X, position.Y, position.Z)
+            };
+        }
+
+        public static MeshGeometry3D GetToolGeometry(Tool tool, Point3D position, Vector3D direction)
+        {
+            switch (tool.ToolType)
+            {
+                case MachineModels.Enums.ToolType.Simple:
+                    return GetSimpleMesh(tool, position, direction);
+                case MachineModels.Enums.ToolType.TwoSection:
+                    return GetTwoSectioMesh(tool, position, direction);
+                case MachineModels.Enums.ToolType.Pointed:
+                    return GetPointedMesh(tool, position, direction);
+                case MachineModels.Enums.ToolType.Disk:
+                    return GetDiskMesh(tool, position, direction);
+                case MachineModels.Enums.ToolType.Countersink:
+                    return GetCountersinkMesh(tool, position, direction);
+                case MachineModels.Enums.ToolType.DiskOnCone:
+                    return GetDiskOnConeMesh(tool, position, direction);
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
         public static ModelVisual3D GetToolModel(Tool tool, Point3D position, Vector3D direction, Func<Tool, Point3D, Vector3D, MeshGeometry3D> getGeometry, Func<string, MeshGeometryVisual3D> visual3DFactory = null)
         {
             var t = (visual3DFactory != null) ? visual3DFactory(tool.Name) : new MeshGeometryVisual3D();

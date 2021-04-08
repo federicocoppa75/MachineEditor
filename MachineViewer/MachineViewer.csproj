@@ -100,6 +100,7 @@
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\ProbeTypeToImageConverter.cs" />
     <Compile Include="Enums\ProbeType.cs" />
+    <Compile Include="Extensions\AngolarTransmissionExtensions.cs" />
     <Compile Include="Extensions\ColliderExtensions.cs" />
     <Compile Include="Extensions\InserterExtensions.cs" />
     <Compile Include="Extensions\LinkExtensions.cs" />
