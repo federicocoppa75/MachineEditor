@@ -47,7 +47,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
 
         private static void ConvertG0(GIstruction istruction, State state, MachineStep step)
         {
-            if(state.Axes.GantryX == StateData.Axes.Gantry.None)
+            if(state.Axes.GantryX == StateData.Gantry.None)
             {
                 var moveX = istruction.Parameters.TryGetValue('X', out double x);
                 var moveU = istruction.Parameters.TryGetValue('U', out double u);
@@ -70,7 +70,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
                 if (istruction.Parameters.TryGetValue('X', out double x)) state.Axes.SetRapidX(x, step, false);
             }
 
-            if (state.Axes.GantryY == StateData.Axes.Gantry.None)
+            if (state.Axes.GantryY == StateData.Gantry.None)
             {
                 var moveY = istruction.Parameters.TryGetValue('Y', out double y);
                 var moveV = istruction.Parameters.TryGetValue('V', out double v);
@@ -93,7 +93,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
                 if (istruction.Parameters.TryGetValue('Y', out double y)) state.Axes.SetRapidY(y, step, false);
             }
 
-            if ((state.Axes.GantryZ == StateData.Axes.Gantry.None) && (state.Axes.GantryZ2 == StateData.Axes.Gantry.None))
+            if ((state.Axes.GantryZ == StateData.Gantry.None) && (state.Axes.GantryZ2 == StateData.Gantry.None))
             {
                 var moveZ = istruction.Parameters.TryGetValue('Z', out double z);
                 var moveW = istruction.Parameters.TryGetValue('W', out double w);

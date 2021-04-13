@@ -11,6 +11,7 @@ using HelixToolkit.Wpf;
 using MachineSteps.Models;
 using MachineSteps.Models.Actions;
 using MachineSteps.Plugins.StepsViewer.Messages;
+using MachineViewer.Extensions;
 using MachineViewer.Plugins.Common.Messages.Generic;
 using MachineViewer.Plugins.Common.Messages.Inverters;
 using MachineViewer.Plugins.Common.Messages.Links;
@@ -208,7 +209,7 @@ namespace MachineSteps.Plugins.StepsViewer.ViewModels
                 }
                 else if(string.Compare(extension, "iso", true) == 0)
                 {
-                    var doc = IsoParser.IsoParser.Parse(dlg.FileName, true, GetLinkLimits);
+                    var doc = IsoParser.IsoParser.Parse(dlg.FileName, true, GetLinkLimits, GetLinearLinksCount);
 
                     if (doc != null)
                     {

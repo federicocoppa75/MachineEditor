@@ -9,5 +9,6 @@ namespace MachineSteps.Plugins.IsoParser
     public static class StateInfoServices
     {
         public static Func<int, Tuple<double, double>> GetLinkLimits { get; set; }
+        public static Func<int> GetLinearLinksCount { get; set; }
     }
 }

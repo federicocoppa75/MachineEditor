@@ -609,6 +609,7 @@ namespace MachineViewer.ViewModels
             }
         }
 
+        protected int GetLinearLinksCount() => Links.Where(o => o.GetLinkType() == LinkType.LinearPosition).Count();
     }
 }
 

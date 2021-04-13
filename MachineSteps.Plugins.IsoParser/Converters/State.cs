@@ -11,7 +11,12 @@ namespace MachineSteps.Plugins.IsoParser.Converters
     {
         public Panel Panel { get; private set; } = new Panel();
 
-        public Axes Axes { get; private set; } = new Axes(-1000.5, 1168.0, -58.0, 1583.0, 0.0, 0.0, 0.0, 0.0);
+        private IAxes _axes;
+        public IAxes Axes 
+        {
+            get => _axes ?? (_axes = new Axes(-1000.5, 1168.0, -58.0, 1583.0, 0.0, 0.0, 0.0, 0.0)); 
+            private set => _axes = value; 
+        } 
 
         public Clamps Clamps { get; private set; } = new Clamps();
 
@@ -38,5 +43,17 @@ namespace MachineSteps.Plugins.IsoParser.Converters
         public ToolChange ToolChange { get; set; } = new ToolChange();
 
         public int StopLinkTurnedOn { get; set; }
+
+        public State()
+        {
+            if((StateInfoServices.GetLinearLinksCount != null) && (StateInfoServices.GetLinearLinksCount() == 3))
+            {
+                _axes = new XYZAxes();
+            }
+            else
+            {
+                _axes = new Axes(-1000.5, 1168.0, -58.0, 1583.0, 0.0, 0.0, 0.0, 0.0);
+            }
+        }
     }
 }

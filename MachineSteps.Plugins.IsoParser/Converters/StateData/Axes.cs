@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MachineSteps.Plugins.IsoParser.Converters.StateData
 {
-    public class Axes
+    public class Axes : IAxes
     {
         // velocità massime
         const double _maxSpeedX = 70000.0;
@@ -36,20 +36,6 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
         // correzione utensile
         public double L { get; set; }
         public double R { get; set; }
-
-        public enum Gantry
-        {
-            None,
-            First,
-            Second
-        };
-
-        public enum GantryCoupling
-        {
-            None,
-            Couple,
-            Single
-        }
 
         public Gantry GantryX { get; private set; }
         public Gantry GantryY { get; private set; }
@@ -298,7 +284,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
             bool b = false;
             var steps = new List<double>();
             var action = new LinearInterpolatedPositionLinkAction() { Name = "G1 move", Positions = new List<LinearInterpolatedPositionLinkAction.PositionItem>() };
- 
+
             if (x.HasValue)
             {
                 var offset = addOffset ? OX : 0.0;
@@ -309,7 +295,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
                     steps.Add(dif);
                     if (b) action.Positions.Add(new LinearInterpolatedPositionLinkAction.PositionItem() { LinkId = 1, RequestPosition = X });
                 }
-                else if(GantryX == Gantry.Second)
+                else if (GantryX == Gantry.Second)
                 {
                     U = UpdatePosition(U, x.Value + offset, out dif, out b);
                     steps.Add(dif);
@@ -321,7 +307,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
                 }
 
             }
-            
+
             if (y.HasValue)
             {
                 var offset = addOffset ? OY : 0.0;
@@ -376,7 +362,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
                 {
                     throw new InvalidOperationException("SetPosition without gantry is not possible!");
                 }
-           }
+            }
 
             if (action.Positions.Count() > 0)
             {
@@ -413,8 +399,8 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
             var yMaster = (GantryY == Gantry.First);
             var actualX = xMaster ? X : U;
             var actualY = yMaster ? Y : V;
-            var v1 = new Tuple<double, double>(actualX -i, actualY -j);
-            var v2 = new Tuple<double, double>(x -i, y -j);
+            var v1 = new Tuple<double, double>(actualX - i, actualY - j);
+            var v2 = new Tuple<double, double>(x - i, y - j);
             var a1 = Math.Atan2(v1.Item2, v1.Item1);
             var a2 = Math.Atan2(v2.Item2, v2.Item1);
             var a = a2 - a1;
@@ -469,7 +455,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
             step.Actions.Add(new LinearPositionLinkGantryOnAction() { Name = "Gantry on XU", MasterId = master, SlaveId = slave, SlaveUnhooked = slaveUnhooked });
             GantryX = gantry;
             GantryCouplingX = slaveUnhooked ? GantryCoupling.Single : GantryCoupling.Couple;
-            GantryStepX = (GantryCouplingX == GantryCoupling.Couple)? U - X : 0.0;
+            GantryStepX = (GantryCouplingX == GantryCoupling.Couple) ? U - X : 0.0;
         }
 
         public void SetGantryY(double g, MachineStep step, bool slaveUnhooked = false)
@@ -481,7 +467,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
             step.Actions.Add(new LinearPositionLinkGantryOnAction() { Name = "Gantry on YV", MasterId = master, SlaveId = slave, SlaveUnhooked = slaveUnhooked });
             GantryY = gantry;
             GantryCouplingY = slaveUnhooked ? GantryCoupling.Single : GantryCoupling.Couple;
-            GantryStepY = (GantryCouplingY == GantryCoupling.Couple) ? V - Y : 0.0; 
+            GantryStepY = (GantryCouplingY == GantryCoupling.Couple) ? V - Y : 0.0;
         }
 
         public void SetGantryZ(double g, MachineStep step, bool slaveUnhooked = false)
@@ -512,14 +498,14 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
             }
         }
 
-         public void ResetGantryX(MachineStep step)
+        public void ResetGantryX(MachineStep step)
         {
-            if(GantryX != Gantry.None)
+            if (GantryX != Gantry.None)
             {
                 if (GantryCouplingX == GantryCoupling.None) throw new InvalidOperationException("Gantry coupling could not be none!");
                 var slaveUnhooked = GantryCouplingX == GantryCoupling.Single;
 
-                if (GantryX == StateData.Axes.Gantry.First)
+                if (GantryX == Gantry.First)
                 {
                     step.Actions.Add(new LinearPositionLinkGantryOffAction() { Name = "Gantry off XU", MasterId = 1, SlaveId = 2, SlaveUnhooked = slaveUnhooked });
                 }
@@ -528,7 +514,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
                     step.Actions.Add(new LinearPositionLinkGantryOffAction() { Name = "Gantry off XU", MasterId = 2, SlaveId = 1, SlaveUnhooked = slaveUnhooked });
                 }
 
-                GantryX = StateData.Axes.Gantry.None;
+                GantryX = Gantry.None;
             }
 
             GantryCouplingX = GantryCoupling.None;
@@ -536,12 +522,12 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
 
         public void ResetGantryY(MachineStep step)
         {
-            if(GantryY != Gantry.None)
+            if (GantryY != Gantry.None)
             {
                 if (GantryCouplingY == GantryCoupling.None) throw new InvalidOperationException("Gantry coupling could not be none!");
                 var slaveUnhooked = GantryCouplingY == GantryCoupling.Single;
 
-                if (GantryY == StateData.Axes.Gantry.First)
+                if (GantryY == Gantry.First)
                 {
                     step.Actions.Add(new LinearPositionLinkGantryOffAction() { Name = "Gantry off YV", MasterId = 101, SlaveId = 201, SlaveUnhooked = slaveUnhooked });
                 }
@@ -550,7 +536,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
                     step.Actions.Add(new LinearPositionLinkGantryOffAction() { Name = "Gantry off YV", MasterId = 201, SlaveId = 101, SlaveUnhooked = slaveUnhooked });
                 }
 
-                GantryY = StateData.Axes.Gantry.None;
+                GantryY = Gantry.None;
             }
 
             GantryCouplingY = GantryCoupling.None;
@@ -558,12 +544,12 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
 
         public void ResetGantryZ(MachineStep step)
         {
-            if(GantryZ != Gantry.None)
+            if (GantryZ != Gantry.None)
             {
                 if (GantryCouplingZ == GantryCoupling.None) throw new InvalidOperationException("Gantry coupling could not be none!");
                 var slaveUnhooked = GantryCouplingZ == GantryCoupling.Single;
 
-                if (GantryZ == StateData.Axes.Gantry.First)
+                if (GantryZ == Gantry.First)
                 {
                     step.Actions.Add(new LinearPositionLinkGantryOffAction() { Name = "Gantry off ZW", MasterId = 102, SlaveId = 202, SlaveUnhooked = slaveUnhooked });
                 }
@@ -572,7 +558,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
                     step.Actions.Add(new LinearPositionLinkGantryOffAction() { Name = "Gantry off ZW", MasterId = 202, SlaveId = 102, SlaveUnhooked = slaveUnhooked });
                 }
 
-                GantryZ = StateData.Axes.Gantry.None;
+                GantryZ = Gantry.None;
             }
 
             GantryCouplingZ = GantryCoupling.None;
@@ -585,7 +571,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
                 if (GantryCouplingZ2 == GantryCoupling.None) throw new InvalidOperationException("Gantry coupling could not be none!");
                 var slaveUnhooked = GantryCouplingZ2 == GantryCoupling.Single;
 
-                if (GantryZ2 == StateData.Axes.Gantry.First)
+                if (GantryZ2 == Gantry.First)
                 {
                     step.Actions.Add(new LinearPositionLinkGantryOffAction() { Name = "Gantry off AB", MasterId = 112, SlaveId = 212, SlaveUnhooked = slaveUnhooked });
                 }
@@ -594,7 +580,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
                     step.Actions.Add(new LinearPositionLinkGantryOffAction() { Name = "Gantry off AB", MasterId = 212, SlaveId = 112, SlaveUnhooked = slaveUnhooked });
                 }
 
-                GantryZ2 = StateData.Axes.Gantry.None;
+                GantryZ2 = Gantry.None;
             }
 
             GantryCouplingZ2 = GantryCoupling.None;
@@ -612,7 +598,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
 
         private void GetMin(int linkId, ref double val)
         {
-            if(StateInfoServices.GetLinkLimits != null)
+            if (StateInfoServices.GetLinkLimits != null)
             {
                 var range = StateInfoServices.GetLinkLimits(linkId);
 

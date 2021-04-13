@@ -6,7 +6,7 @@ namespace MachineSteps.Plugins.IsoParser
 {
     public class IsoParser
     {
-        public static MachineStepsDocument Parse(string fileName, bool traceOut = false, Func<int, Tuple<double, double>> getLinkLimits = null)
+        public static MachineStepsDocument Parse(string fileName, bool traceOut = false, Func<int, Tuple<double, double>> getLinkLimits = null, Func<int> getLinearLinksCount = null)
         {
             MachineStepsDocument msd = null;
 
@@ -29,6 +29,7 @@ namespace MachineSteps.Plugins.IsoParser
             if (parser.Istructions != null && parser.Istructions.Count > 0)
             {
                 StateInfoServices.GetLinkLimits = getLinkLimits;
+                StateInfoServices.GetLinearLinksCount = getLinearLinksCount;
 
                 msd = IstructionToActionConverter.Convert(parser.Istructions);
 

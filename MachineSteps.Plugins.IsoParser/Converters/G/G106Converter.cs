@@ -49,11 +49,11 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
 
         private List<MachineStep> CreateLoadToolStep(State state, ToolChange.ToolChangeStep toolchangeStepData, bool openToolStore, bool closeToolStore)
         {
-            bool resetGantry = (state.Axes.GantryY == Axes.Gantry.Second) ||
-                                ((state.Axes.GantryY == Axes.Gantry.First) && (Math.Abs(state.Axes.GantryStepY - _gantryToolchangeDistance) > 0.001));
-            bool moveGantry = resetGantry || (state.Axes.GantryY == Axes.Gantry.None);
-            bool setGantry = state.Axes.GantryY != Axes.Gantry.First;
-            bool moveSynchro = (state.Axes.GantryY == Axes.Gantry.First) && (Math.Abs(state.Axes.GantryStepY - _gantryToolchangeDistance) <= 0.001);
+            bool resetGantry = (state.Axes.GantryY == Gantry.Second) ||
+                                ((state.Axes.GantryY == Gantry.First) && (Math.Abs(state.Axes.GantryStepY - _gantryToolchangeDistance) > 0.001));
+            bool moveGantry = resetGantry || (state.Axes.GantryY == Gantry.None);
+            bool setGantry = state.Axes.GantryY != Gantry.First;
+            bool moveSynchro = (state.Axes.GantryY == Gantry.First) && (Math.Abs(state.Axes.GantryStepY - _gantryToolchangeDistance) <= 0.001);
             var steps = new List<MachineStep>();
 
             if (resetGantry) AddResetGantrySteps(state, steps);
@@ -73,11 +73,11 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
 
         private List<MachineStep> CreateUnloadToolStep(State state, ToolChange.ToolChangeStep toolchangeStepData, bool openToolStore, bool closeToolStore)
         {
-            bool resetGantry = (state.Axes.GantryY == Axes.Gantry.Second) ||
-                                ((state.Axes.GantryY == Axes.Gantry.First) && (state.Axes.GantryStepY != _gantryToolchangeDistance));
-            bool moveGantry = resetGantry || (state.Axes.GantryY == Axes.Gantry.None);
-            bool setGantry = state.Axes.GantryY != Axes.Gantry.First;
-            bool moveSynchro = (state.Axes.GantryY == Axes.Gantry.First) && (state.Axes.GantryStepY == _gantryToolchangeDistance);
+            bool resetGantry = (state.Axes.GantryY == Gantry.Second) ||
+                                ((state.Axes.GantryY == Gantry.First) && (state.Axes.GantryStepY != _gantryToolchangeDistance));
+            bool moveGantry = resetGantry || (state.Axes.GantryY == Gantry.None);
+            bool setGantry = state.Axes.GantryY != Gantry.First;
+            bool moveSynchro = (state.Axes.GantryY == Gantry.First) && (state.Axes.GantryStepY == _gantryToolchangeDistance);
             var steps = new List<MachineStep>();
 
             if (resetGantry) AddResetGantrySteps(state, steps);
