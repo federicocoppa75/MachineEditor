@@ -89,9 +89,24 @@ namespace MachineViewer.ViewModels.ToolHolder
 
                     Task.Run(() =>
                     {
-                        var p = t.Transform(Position);
-                        var v = t.Transform(Direction);
-                        if (_tool != null) msg.SetData(p, v, _tool, ToolHolderId);
+                        if (_tool.ToolType == ToolType.AngularTransmissionImpl)
+                        {
+                            var at = _tool as AngolarTransmissionImpl;
+                            int i = 0;
+
+                            foreach (var item in at.Subspindles)
+                            {
+                                var p = t.Transform(Position + item.Position.ToVector3D());
+                                var v = t.Transform(item.Direction.ToVector3D());
+                                msg.SetData(p, v, item.Tool, ToolHolderId + i++);
+                            }
+                        }
+                        else
+                        {
+                            var p = t.Transform(Position);
+                            var v = t.Transform(Direction);
+                            if (_tool != null) msg.SetData(p, v, _tool, ToolHolderId);
+                        }
                     });                   
                 });
             }
