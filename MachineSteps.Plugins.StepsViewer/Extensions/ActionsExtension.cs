@@ -376,12 +376,6 @@ namespace MachineSteps.Plugins.StepsViewer.Extensions
 
         public static void ExecuteAction(this NotOperationAction a, int actionId = 0)
         {
-            //Task.Run(async () =>
-            //{
-            //    await Task.Delay(50);
-            //    Messenger.Default.Send(new MachineViewer.Plugins.Common.Messages.Generic.BackNotificationMessage() { DestinationId = actionId });
-            //});
-
             Messenger.Default.Send(new MachineViewer.Plugins.Common.Messages.Generic.BackNotificationMessage() { DestinationId = actionId });
         }
 

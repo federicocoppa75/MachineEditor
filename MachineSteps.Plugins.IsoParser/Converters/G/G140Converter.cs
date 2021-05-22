@@ -21,13 +21,18 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
                 var steps = new List<MachineStep>();
 
                 ManagePreviousSynchro(istruction, state, steps);
+                ManageNotOperation(istruction, state, steps);
                 AddSynchroSteps(istruction, state, steps);
 
                 return steps;
             }
             else
             {
-                return null;
+                var steps = new List<MachineStep>();
+
+                ManageWaiter(istruction, state, steps);
+
+                return steps;
             }
         }
 
@@ -40,9 +45,9 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
 
         private void AddSynchroSteps(GIstruction istruction, State state, List<MachineStep> steps)
         {
-            var moveStepXY = new MachineStep() { Id = GetStepId(), Name = "G140 - Move XY",  Actions = new List<BaseAction>() };
-            var moveStepZ = new MachineStep() { Id = GetStepId(), Name = "G140 - Move Z",  Actions = new List<BaseAction>() };
-            var synStep = new MachineStep() { Id= GetStepId(), Name = "G140 - Gantry", Actions = new List<BaseAction>() };
+            var moveStepXY = new MachineStep() { Id = GetStepId(), Name = "G140 - Move XY",  Actions = new List<BaseAction>(), Channel = 1 };
+            var moveStepZ = new MachineStep() { Id = GetStepId(), Name = "G140 - Move Z",  Actions = new List<BaseAction>(), Channel = 1 };
+            var synStep = new MachineStep() { Id= GetStepId(), Name = "G140 - Gantry", Actions = new List<BaseAction>(), Channel = 1 };
             bool invertOrder = false;
 
             if(istruction.Parameters.Keys.Contains('H'))
@@ -155,6 +160,37 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
             }
 
             if (step.Actions.Count > 0) steps.Add(step);
+        }
+
+        private void ManageNotOperation(GIstruction istruction, State state, List<MachineStep> steps)
+        {
+            if (steps.Count == 0)
+            {
+                var step = new MachineStep()
+                {
+                    Id = GetStepId(),
+                    Name = "G140 - NOP",
+                    Actions = new List<BaseAction>()
+                };
+
+                step.Actions.Add(new NotOperationAction() { Name = "NOP", Description = "NOP to start" });
+
+                steps.Add(step);
+            }     
+        }
+
+        private void ManageWaiter(GIstruction istruction, State state, List<MachineStep> steps)
+        {
+            var step = new MachineStep()
+            {
+                Id = GetStepId(),
+                Name = "G140 - Synchro",
+                Actions = new List<BaseAction>()
+            };
+
+            step.Actions.Add(new ChannelWaiterAction() { Name = "Waiter", Description = "Channel waiter", ChannelToWait = 1 });
+
+            steps.Add(step);
         }
 
         private bool IsSynchro(GIstruction istruction)
