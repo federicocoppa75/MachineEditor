@@ -110,6 +110,12 @@ namespace MachineSteps.Editor.ViewModels
                 case ActionType.ArcInterpolatedPositionLink:
                     action = new ArcInterpolatedPositionLinkAction();
                     break;
+                case ActionType.ChannelWaiter:
+                    action = new ChannelWaiterAction();
+                    break;
+                case ActionType.NotOperation:
+                    action = new NotOperationAction();
+                    break;
                 default:
                     break;
             }

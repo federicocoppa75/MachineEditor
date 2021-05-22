@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using MachineSteps.Models.Actions;
+using MachineSteps.Plugins.StepsViewer.Messages;
 using MachineSteps.Plugins.StepsViewer.Models;
 using MachineViewer.Plugins.Common.Messages.Inserter;
 using MachineViewer.Plugins.Common.Messages.Inverters;
@@ -199,6 +200,8 @@ namespace MachineSteps.Plugins.StepsViewer.Extensions
             else if (a is TurnOffInverterAction toffia) toffia.ExecuteAction(actionId);
             else if (a is TurnOnInverterAction tonia) tonia.ExecuteAction(actionId);
             else if (a is UpdateRotationSpeedAction ursa) ursa.ExecuteAction(actionId);
+            else if (a is ChannelWaiterAction cwa) cwa.ExecuteAction(actionId);
+            else if (a is NotOperationAction noa) noa.ExecuteAction(actionId);
         }
 
         public static void ExecuteAction(this AddPanelAction a, int actionId = 0)
@@ -360,6 +363,26 @@ namespace MachineSteps.Plugins.StepsViewer.Extensions
                 Duration = a.Duration,
                 BackNotifyId = actionId
             });
+        }
+
+        public static void ExecuteAction(this ChannelWaiterAction a, int actionId = 0)
+        {
+            Messenger.Default.Send(new WaitForChannelFreeMessage()
+            {
+                Channel = a.ChannelToWait,
+                BackNotifyId = actionId
+            });
+        }
+
+        public static void ExecuteAction(this NotOperationAction a, int actionId = 0)
+        {
+            //Task.Run(async () =>
+            //{
+            //    await Task.Delay(50);
+            //    Messenger.Default.Send(new MachineViewer.Plugins.Common.Messages.Generic.BackNotificationMessage() { DestinationId = actionId });
+            //});
+
+            Messenger.Default.Send(new MachineViewer.Plugins.Common.Messages.Generic.BackNotificationMessage() { DestinationId = actionId });
         }
 
         public static double GetDuration(this BaseAction action)

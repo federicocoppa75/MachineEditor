@@ -93,11 +93,13 @@
     <Compile Include="Messages\DynamicTransitionChangedMessage.cs" />
     <Compile Include="Messages\LoadStepsMessage.cs" />
     <Compile Include="Messages\MaterialRemovalMessage.cs" />
+    <Compile Include="Messages\MultiChannelMessage.cs" />
     <Compile Include="Messages\ResumePlaybackSettingsMessage.cs" />
     <Compile Include="Messages\StepCompleteMessage.cs" />
     <Compile Include="Messages\SuspendPlaybackSettingsMessage.cs" />
     <Compile Include="Messages\UnloadStepsMessage.cs" />
     <Compile Include="Messages\UpdateStepTimeMessage.cs" />
+    <Compile Include="Messages\WaitForChannelFreeMessage.cs" />
     <Compile Include="Models\ArcInterpolatedPositionLinkLazyAction.cs" />
     <Compile Include="Models\ILazyAction.cs" />
     <Compile Include="Models\LinearInterpolatedPositionLinkLazyAction.cs" />

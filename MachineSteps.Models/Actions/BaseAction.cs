@@ -20,6 +20,8 @@ namespace MachineSteps.Models.Actions
     [XmlInclude(typeof(TurnOffInverterAction))]
     [XmlInclude(typeof(TurnOnInverterAction))]
     [XmlInclude(typeof(UpdateRotationSpeedAction))]
+    [XmlInclude(typeof(ChannelWaiterAction))]
+    [XmlInclude(typeof(NotOperationAction))]
     [Serializable]
     public abstract class BaseAction : IBaseAction
     {

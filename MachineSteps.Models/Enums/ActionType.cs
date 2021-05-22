@@ -22,6 +22,8 @@ namespace MachineSteps.Models.Enums
         Inject,
         TurnOnInverter,
         TurnOffInverter,
-        UpdateRotationSpeed
+        UpdateRotationSpeed,
+        ChannelWaiter,
+        NotOperation
     }
 }

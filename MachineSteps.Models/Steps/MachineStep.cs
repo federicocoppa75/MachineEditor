@@ -14,5 +14,6 @@ namespace MachineSteps.Models.Steps
         public string Name { get; set; }
         public string Description { get; set; }
         public List<BaseAction> Actions { get; set; }
+        public int Channel { get; set; }
     }
 }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace MachineSteps.Plugins.StepsViewer.Messages
 {
-    public class StepCompleteMessage
+    public class WaitForChannelFreeMessage
     {
-        public int Id { get; set; }
-        public int Index { get; set; }
         public int Channel { get; set; }
+        public int BackNotifyId { get; set; }
     }
 }
