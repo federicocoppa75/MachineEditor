@@ -59,16 +59,29 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
 
         public void SetRapidZ(double pos, MachineStep step, bool addOffset = true) => SetZ(pos, step, addOffset);
 
+        public void SetRapid(double? nx, double? ny, double? nz, MachineStep step, bool addOffset = true)
+        {
+            double? x = null, y = null, z = null;
+
+            M.Transform(nx, ny, nz, ref x, ref y, ref z);
+
+            if (x.HasValue) SetRapidX(x.Value, step, addOffset);
+            if (y.HasValue) SetRapidY(y.Value, step, addOffset);
+            if (z.HasValue) SetRapidZ(z.Value, step, addOffset);
+        }
+
         public void SetX(double pos, MachineStep step, bool addOffset = true)
         {
-            var offset = addOffset ? OX : 0.0;
+            GetToolOffset(out double toolOffsetX, out double toolOffsetY, out double toolOffsetZ);
+            var offset = addOffset ? OX + toolOffsetX : 0.0;
             X = GetNewPositionCalcolateDuration(X, pos + offset, _maxSpeedX, out double t);
             step?.Actions.Add(new LinearPositionLinkAction() { Name = "Move X", LinkId = 1, RequestedPosition = X, Duration = t });
         }
 
         public void SetY(double pos, MachineStep step, bool addOffset = true)
         {
-            var offset = addOffset ? OY : 0.0;
+            GetToolOffset(out double toolOffsetX, out double toolOffsetY, out double toolOffsetZ);
+            var offset = addOffset ? OY + toolOffsetY : 0.0;
             Y = GetNewPositionCalcolateDuration(Y, pos + offset, _maxSpeedY, out double t);
             step?.Actions.Add(new LinearPositionLinkAction() { Name = "Move Y", LinkId = 2, RequestedPosition = Y, Duration = t });
 
@@ -76,7 +89,8 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
 
         public void SetZ(double pos, MachineStep step, bool addOffset = true)
         {
-            var offset = addOffset ? OZ + L : 0.0;
+            GetToolOffset(out double toolOffsetX, out double toolOffsetY, out double toolOffsetZ);
+            var offset = addOffset ? OZ + toolOffsetZ : 0.0;
             Z = GetNewPositionCalcolateDuration(Z, pos + offset, _maxSpeedZ, out double t);
             step?.Actions.Add(new LinearPositionLinkAction() { Name = "Move Z", LinkId = 3, RequestedPosition = Z, Duration = t });
         }
@@ -206,9 +220,11 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
             var steps = new List<double>();
             var action = new LinearInterpolatedPositionLinkAction() { Name = "G1 move", Positions = new List<LinearInterpolatedPositionLinkAction.PositionItem>() };
 
+            GetToolOffset(out double toolOffsetX, out double toolOffsetY, out double toolOffsetZ);
+
             if (x.HasValue)
             {
-                var offset = addOffset ? OX : 0.0;
+                var offset = addOffset ? OX + toolOffsetX : 0.0;
 
                 X = UpdatePosition(X, x.Value + offset, out dif, out b);
                 steps.Add(dif);
@@ -217,7 +233,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
 
             if (y.HasValue)
             {
-                var offset = addOffset ? OY : 0.0;
+                var offset = addOffset ? OY + toolOffsetY : 0.0;
 
                 Y = UpdatePosition(Y, y.Value + offset, out dif, out b);
                 steps.Add(dif);
@@ -226,7 +242,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
 
             if (z.HasValue)
             {
-                var offset = addOffset ? OZ + L : 0.0;
+                var offset = addOffset ? OZ + toolOffsetZ : 0.0;
 
                 Z = UpdatePosition(Z, z.Value + offset, out dif, out b);
                 steps.Add(dif);
@@ -346,6 +362,11 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
             return newAxPos;
         }
 
-        
+        private void GetToolOffset(out double x, out double y, out double z)
+        {
+            x = L * M.M;
+            y = L * M.N;
+            z = L * M.O;
+        }
     }
 }

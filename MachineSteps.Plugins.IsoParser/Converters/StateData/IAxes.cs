@@ -51,6 +51,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
         void SetRapidX(double pos, MachineStep step, bool addOffset = true);
         void SetRapidY(double pos, MachineStep step, bool addOffset = true);
         void SetRapidZ(double pos, MachineStep step, bool addOffset = true);
+        void SetRapid(double? nx, double? ny, double? nz, MachineStep step, bool addOffset = true);
         void SetU(double pos, MachineStep step, bool addOffset = true);
         void SetV(double pos, MachineStep step, bool addOffset = true);
         void SetW(double pos, MachineStep step, bool addOffset = true);

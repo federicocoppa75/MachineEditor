@@ -107,7 +107,36 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
             }
             else
             {
-                throw new NotImplementedException();
+                if ((xIn.HasValue && (I != 0.0)) || (yIn.HasValue && (P != 0.0)) || (zIn.HasValue && (U != 0.0)))
+                {
+                    // ATTENZIONE: le componenti Y e Z locali proiettate sulla X del sistema macchina sono moltipicati per un fattore -1.0
+                    //             perché la X è inverita per via della movimentazione a pinza, la componente X è già invertita nell'ISO
+                    xOut = (xIn.HasValue ? xIn.Value * I : 0.0) + (yIn.HasValue ? yIn.Value * P * (-1.0) : 0.0) + (zIn.HasValue ? zIn.Value * U * (-1.0): 0.0);
+                }
+                else
+                {
+                    xOut = null;
+                }
+
+                if ((xIn.HasValue && (J != 0.0)) || (yIn.HasValue && (Q != 0.0)) || (zIn.HasValue && (V != 0.0)))
+                {
+                    // ATTENZIONE: la componente X locale proiettata dulla Y globale è moltiplicata per un fattore -1.0 perché nell'ISO è invertita (per il movimento tramite pinza)
+                    yOut = (xIn.HasValue ? xIn.Value * J * (-1.0) : 0.0) + (yIn.HasValue ? yIn.Value * Q : 0.0) + (zIn.HasValue ? zIn.Value * V : 0.0);
+                }
+                else
+                {
+                    yOut = null;
+                }
+
+                if ((xIn.HasValue && (K != 0.0)) || (yIn.HasValue && (R != 0.0)) || (zIn.HasValue && (W != 0.0)))
+                {
+                    // ATTENZIONE: la componente X locale proiettata dulla Z globale è moltiplicata per un fattore -1.0 perché nell'ISO è invertita (per il movimento tramite pinza)
+                    zOut = (xIn.HasValue ? xIn.Value * K * (-1.0) : 0.0) + (yIn.HasValue ? yIn.Value * R : 0.0) + (zIn.HasValue ? zIn.Value * W : 0.0);
+                }
+                else
+                {
+                    zOut = null;
+                }
             }
         }
 

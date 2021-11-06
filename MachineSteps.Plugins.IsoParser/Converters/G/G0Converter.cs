@@ -22,9 +22,24 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
 
             if (istruction.Parameters != null && istruction.Parameters.Count > 0)
             {
-                if (istruction.Parameters.TryGetValue('X', out double x)) state.Axes.SetRapidX(x, step);
-                if (istruction.Parameters.TryGetValue('Y', out double y)) state.Axes.SetRapidY(y, step);
-                if (istruction.Parameters.TryGetValue('Z', out double z)) state.Axes.SetRapidZ(z, step);
+                if(state.Axes.M.IsIdentity() || state.Axes.M.IsIdentityFlipped())
+                {
+                    if (istruction.Parameters.TryGetValue('X', out double x)) state.Axes.SetRapidX(x, step);
+                    if (istruction.Parameters.TryGetValue('Y', out double y)) state.Axes.SetRapidY(y, step);
+                    if (istruction.Parameters.TryGetValue('Z', out double z)) state.Axes.SetRapidZ(z, step);
+                }
+                else
+                {
+                    double? nx = null;
+                    double? ny = null;
+                    double? nz = null;
+
+                    if (istruction.Parameters.TryGetValue('X', out double x)) nx = x;
+                    if (istruction.Parameters.TryGetValue('Y', out double y)) ny = y;
+                    if (istruction.Parameters.TryGetValue('Z', out double z)) nz = z;
+
+                    state.Axes.SetRapid(nx, ny, nz, step);
+                }
 
                 SetActionsIds(step);
                 SetMaxDuration(step);
