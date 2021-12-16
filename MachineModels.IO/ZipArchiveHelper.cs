@@ -11,7 +11,7 @@ namespace MachineModels.IO
     public class ZipArchiveHelper
     {
         private const string _machineFileName = "machine.xml";
-        private const string _tooSetFileName = "toos.tools";
+        private const string _tooSetFileName = "tools.tools";
         private const string _toolingFileName = "tooling.tooling";
 
         private List<string> _entrieeNames = new List<string>();
