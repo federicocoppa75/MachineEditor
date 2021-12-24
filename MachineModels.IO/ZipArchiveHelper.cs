@@ -11,7 +11,8 @@ namespace MachineModels.IO
     public class ZipArchiveHelper
     {
         private const string _machineFileName = "machine.xml";
-        private const string _tooSetFileName = "tools.tools";
+        private const string _toolsSetFileName = "tools.tools";
+        private const string _oldToolsSetFileName = "toos.tools";
         private const string _toolingFileName = "tooling.tooling";
 
         private List<string> _entrieeNames = new List<string>();
@@ -106,8 +107,10 @@ namespace MachineModels.IO
 
                 ZipFile.ExtractToDirectory(importFile, extractPath);
 
+                var toolsFileName = dirInfo.GetFiles(_oldToolsSetFileName).Length > 0 ? _oldToolsSetFileName : _toolsSetFileName;
+
                 machProjectFile = $"{extractPath}\\{_machineFileName}";
-                toolsFile = $"{extractPath}\\{_tooSetFileName}";
+                toolsFile = $"{extractPath}\\{toolsFileName}";
                 toolingFile = $"{extractPath}\\{_toolingFileName}";
 
                 var machine = GetMachine(machProjectFile);
@@ -220,7 +223,7 @@ namespace MachineModels.IO
 
             if(save)
             {
-                var toolSetFile = $"{extractPath}\\{_tooSetFileName}";
+                var toolSetFile = $"{extractPath}\\{_toolsSetFileName}";
                 SaveToolSetFile(toolSet, toolSetFile);
             }
         }
@@ -228,7 +231,7 @@ namespace MachineModels.IO
         private void UpdateModelsFiles(Tooling tooling, string extractPath, bool save = false)
         {
             tooling.MachineFile = $"{extractPath}\\{_machineFileName}";
-            tooling.ToolsFile = $"{extractPath}\\{_tooSetFileName}";
+            tooling.ToolsFile = $"{extractPath}\\{_toolsSetFileName}";
 
             if(save)
             {
@@ -390,7 +393,7 @@ namespace MachineModels.IO
             FilterModelsNames(toolSet);
 
             var serializer = new System.Xml.Serialization.XmlSerializer(typeof(ToolSet));
-            var entry = archive.CreateEntry(_tooSetFileName);
+            var entry = archive.CreateEntry(_toolsSetFileName);
 
             using (var writer = new StreamWriter(entry.Open()))
             {
@@ -474,7 +477,7 @@ namespace MachineModels.IO
         private void FilterModelsNames(Tooling tooling)
         {            
             tooling.MachineFile = _machineFileName;
-            tooling.ToolsFile = _tooSetFileName;
+            tooling.ToolsFile = _toolsSetFileName;
         }
     }
 }
