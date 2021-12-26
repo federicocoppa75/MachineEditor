@@ -108,13 +108,14 @@ namespace MachineModels.IO
                 ZipFile.ExtractToDirectory(importFile, extractPath);
 
                 var toolsFileName = dirInfo.GetFiles(_oldToolsSetFileName).Length > 0 ? _oldToolsSetFileName : _toolsSetFileName;
+                var loadToolsFile = $"{extractPath}\\{toolsFileName}";
 
                 machProjectFile = $"{extractPath}\\{_machineFileName}";
-                toolsFile = $"{extractPath}\\{toolsFileName}";
+                toolsFile = $"{extractPath}\\{_toolsSetFileName}";
                 toolingFile = $"{extractPath}\\{_toolingFileName}";
 
                 var machine = GetMachine(machProjectFile);
-                var toolSet = GetToolSet(toolsFile);
+                var toolSet = GetToolSet(loadToolsFile);
                 var tooling = GetTooling(toolingFile);
 
                 UpdateModelsFiles(machine, extractPath, true);
