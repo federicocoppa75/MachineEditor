@@ -33,13 +33,27 @@ namespace MachineSteps.Plugins.IsoParser
 
             foreach (var item in Istructions)
             {
-                var mss = cm.Convert(item);
-
-                if(mss != null && mss.Count > 0)
+                try
                 {
-                    if (_machineSteps == null) _machineSteps = new List<MachineStep>();
+                    var mss = cm.Convert(item);
 
-                    _machineSteps.AddRange(mss);
+                    if (mss != null && mss.Count > 0)
+                    {
+                        if (_machineSteps == null) _machineSteps = new List<MachineStep>();
+
+                        _machineSteps.AddRange(mss);
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    if(e is System.NotImplementedException)
+                    {
+                        throw new System.NotImplementedException($"Line {item.LineNumber}", e);
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
 
