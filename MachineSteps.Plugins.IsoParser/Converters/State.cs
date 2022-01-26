@@ -44,6 +44,8 @@ namespace MachineSteps.Plugins.IsoParser.Converters
 
         public int StopLinkTurnedOn { get; set; }
 
+        public Plane Plane { get; set; } = new Plane();
+
         public State()
         {
             if((StateInfoServices.GetLinearLinksCount != null) && (StateInfoServices.GetLinearLinksCount() == 3))

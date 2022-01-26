@@ -48,7 +48,7 @@ namespace MachineSteps.Plugins.IsoParser
                 {
                     if(e is System.NotImplementedException)
                     {
-                        throw new System.NotImplementedException($"Line {item.LineNumber}", e);
+                        throw new System.NotImplementedException($"Line {item.LineNumber} - {e.Message}", e);
                     }
                     else
                     {
