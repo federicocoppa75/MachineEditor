@@ -610,6 +610,8 @@ namespace MachineViewer.ViewModels
         }
 
         protected int GetLinearLinksCount() => Links.Where(o => o.GetLinkType() == LinkType.LinearPosition).Count();
+
+        protected IList<int> GetLinearLinksIds() => Links.Where(o => o.GetLinkType() == LinkType.LinearPosition).Select(o => (o as DynamicLinkViewModel).Id).ToList();
     }
 }
 

@@ -10,5 +10,6 @@ namespace MachineSteps.Plugins.IsoParser
     {
         public static Func<int, Tuple<double, double>> GetLinkLimits { get; set; }
         public static Func<int> GetLinearLinksCount { get; set; }
+        public static Func<IList<int>> GetLinearLinksIds { get; set; }
     }
 }

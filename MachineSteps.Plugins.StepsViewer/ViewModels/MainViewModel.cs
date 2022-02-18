@@ -223,7 +223,7 @@ namespace MachineSteps.Plugins.StepsViewer.ViewModels
                 }
                 else if(string.Compare(extension, "iso", true) == 0)
                 {
-                    var doc = IsoParser.IsoParser.Parse(dlg.FileName, true, GetLinkLimits, GetLinearLinksCount);
+                    var doc = IsoParser.IsoParser.Parse(dlg.FileName, true, GetLinkLimits, GetLinearLinksCount, GetLinearLinksIds);
 
                     if (doc != null)
                     {

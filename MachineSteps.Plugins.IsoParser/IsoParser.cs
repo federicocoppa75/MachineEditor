@@ -1,12 +1,13 @@
 ﻿using MachineSteps.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace MachineSteps.Plugins.IsoParser
 {
     public class IsoParser
     {
-        public static MachineStepsDocument Parse(string fileName, bool traceOut = false, Func<int, Tuple<double, double>> getLinkLimits = null, Func<int> getLinearLinksCount = null)
+        public static MachineStepsDocument Parse(string fileName, bool traceOut = false, Func<int, Tuple<double, double>> getLinkLimits = null, Func<int> getLinearLinksCount = null, Func<IList<int>> getLinearLinksIds = null)
         {
             MachineStepsDocument msd = null;
 
@@ -30,6 +31,7 @@ namespace MachineSteps.Plugins.IsoParser
             {
                 StateInfoServices.GetLinkLimits = getLinkLimits;
                 StateInfoServices.GetLinearLinksCount = getLinearLinksCount;
+                StateInfoServices.GetLinearLinksIds = getLinearLinksIds;
 
                 msd = IstructionToActionConverter.Convert(parser.Istructions);
 

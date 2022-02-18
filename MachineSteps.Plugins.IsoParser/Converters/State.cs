@@ -50,7 +50,16 @@ namespace MachineSteps.Plugins.IsoParser.Converters
         {
             if((StateInfoServices.GetLinearLinksCount != null) && (StateInfoServices.GetLinearLinksCount() == 3))
             {
-                _axes = new XYZAxes();
+                var ids = (StateInfoServices.GetLinearLinksIds != null) ? StateInfoServices.GetLinearLinksIds() : null;
+
+                if((ids != null) && ids.Contains(101) && ids.Contains(102))
+                {
+                    _axes = new Axes(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+                }
+                else
+                {
+                    _axes = new XYZAxes();
+                }                
             }
             else
             {
