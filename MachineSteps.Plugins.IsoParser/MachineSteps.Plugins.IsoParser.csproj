@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.8</Version>
+    <Version>1.1.9</Version>
     <Company>FC75</Company>
     <Authors>FC</Authors>
-    <AssemblyVersion>1.1.7.0</AssemblyVersion>
-    <FileVersion>1.1.7.0</FileVersion>
+    <AssemblyVersion>1.1.9.0</AssemblyVersion>
+    <FileVersion>1.1.9.0</FileVersion>
     <RepositoryUrl>https://github.com/federicocoppa75/MachineEditor</RepositoryUrl>
   </PropertyGroup>
 

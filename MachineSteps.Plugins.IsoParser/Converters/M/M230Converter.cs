@@ -22,18 +22,18 @@ namespace MachineSteps.Plugins.IsoParser.Converters.M
                 new MachineStep() 
                 { 
                     Id = GetStepId(), 
-                    Name = "Roolbar UP",
+                    Name = "Roolbar reset",
                     Actions = new List<Models.Actions.BaseAction> 
                     {
                         new TwoPositionLinkAction()
                         {
                             LinkId = 71,
-                            RequestedState = TwoPositionLinkActionRequestedState.On
+                            RequestedState = TwoPositionLinkActionRequestedState.Off
                         },
                         new TwoPositionLinkAction()
                         {
                             LinkId = 72,
-                            RequestedState = TwoPositionLinkActionRequestedState.On
+                            RequestedState = TwoPositionLinkActionRequestedState.Off
                         }
                     }
                 }
