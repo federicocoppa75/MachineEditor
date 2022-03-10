@@ -51,6 +51,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
         public GantryCoupling GantryCouplingY { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public GantryCoupling GantryCouplingZ { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public GantryCoupling GantryCouplingZ2 { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool Is3AxesWithVirtuals { get => false; set => throw new NotImplementedException(); }
 
 
         public void SetRapidX(double pos, MachineStep step, bool addOffset = true) => SetX(pos, step, addOffset);

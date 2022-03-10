@@ -51,6 +51,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
         public GantryCoupling GantryCouplingY { get; set; }
         public GantryCoupling GantryCouplingZ { get; set; }
         public GantryCoupling GantryCouplingZ2 { get; set; }
+        public bool Is3AxesWithVirtuals { get; set; }
 
         public Axes()
         {

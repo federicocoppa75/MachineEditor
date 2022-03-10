@@ -54,7 +54,9 @@ namespace MachineSteps.Plugins.IsoParser.Converters
 
                 if((ids != null) && ids.Contains(101) && ids.Contains(102))
                 {
-                    _axes = new Axes(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+                    var is3AxesWithVirtuals = !ids.Contains(201) && !ids.Contains(202) && !ids.Contains(2); // CX110
+
+                    _axes = new Axes(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0) { Is3AxesWithVirtuals = is3AxesWithVirtuals };
                 }
                 else
                 {

@@ -39,11 +39,11 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
 
             if(toolchangeStepData.SinkPosition >= 1000)
             {
-                return CreateLoadToolStep(state, toolchangeStepData, openToolStore, closeToolStore);
+                return state.Axes.Is3AxesWithVirtuals ? CreateLoadToolStepSimple(state, toolchangeStepData, openToolStore, closeToolStore) : CreateLoadToolStep(state, toolchangeStepData, openToolStore, closeToolStore);
             }
             else
             {
-                return CreateUnloadToolStep(state, toolchangeStepData, openToolStore, closeToolStore);
+                return state.Axes.Is3AxesWithVirtuals ? CreateUnloadToolStepSimple(state, toolchangeStepData, openToolStore, closeToolStore) : CreateUnloadToolStep(state, toolchangeStepData, openToolStore, closeToolStore);
             }
         }
 
@@ -71,6 +71,15 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
             return (steps.Count() > 0) ? steps : null;
         }
 
+        private List<MachineStep> CreateLoadToolStepSimple(State state, ToolChange.ToolChangeStep toolchangeStepData, bool openToolStore, bool closeToolStore)
+        {
+            var steps = new List<MachineStep>();
+
+            AddLoadToolSteps(state, toolchangeStepData.SinkPosition, toolchangeStepData.SourcePosition, steps);
+
+            return (steps.Count() > 0) ? steps : null;
+        }
+
         private List<MachineStep> CreateUnloadToolStep(State state, ToolChange.ToolChangeStep toolchangeStepData, bool openToolStore, bool closeToolStore)
         {
             bool resetGantry = (state.Axes.GantryY == Gantry.Second) ||
@@ -91,6 +100,15 @@ namespace MachineSteps.Plugins.IsoParser.Converters.G
             AddMoveZUpStep(state, steps);
             if (closeToolStore) AddCloseToolstore(state, steps);
             AddPneumaticUp(state, steps);
+
+            return (steps.Count() > 0) ? steps : null;
+        }
+
+        private List<MachineStep> CreateUnloadToolStepSimple(State state, ToolChange.ToolChangeStep toolchangeStepData, bool openToolStore, bool closeToolStore)
+        {
+            var steps = new List<MachineStep>();
+
+            AddUnloadToolSteps(state, toolchangeStepData.SourcePosition, toolchangeStepData.SinkPosition, steps);
 
             return (steps.Count() > 0) ? steps : null;
         }

@@ -47,6 +47,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
         GantryCoupling GantryCouplingY { get; set; }
         GantryCoupling GantryCouplingZ { get; set; }
         GantryCoupling GantryCouplingZ2 { get; set; }
+        bool Is3AxesWithVirtuals { get; set; }
 
         void SetRapidX(double pos, MachineStep step, bool addOffset = true);
         void SetRapidY(double pos, MachineStep step, bool addOffset = true);
