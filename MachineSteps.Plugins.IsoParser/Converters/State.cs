@@ -36,6 +36,8 @@ namespace MachineSteps.Plugins.IsoParser.Converters
 
         public int HeadOrderTurnedOn { get; set; }
 
+        public int HeadSetup { get; set; }
+
         public int RotationSpeed { get; set; }
 
         public int FeedSpeed { get; set; }

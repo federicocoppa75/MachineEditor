@@ -50,6 +50,10 @@ namespace MachineSteps.Plugins.IsoParser
                     {
                         throw new System.NotImplementedException($"Line {item.LineNumber} - {e.Message}", e);
                     }
+                    else if(e is System.InvalidOperationException)
+                    {
+                        throw new System.InvalidOperationException($"Line {item.LineNumber} - {e.Message}", e);
+                    }
                     else
                     {
                         throw;
