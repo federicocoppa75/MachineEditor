@@ -25,13 +25,12 @@ namespace MachineSteps.Plugins.IsoParser.Converters.M
 
             if((list != null) && 
                 (list.Count == 1) && 
-                (GetLinkId(state) == 3001) && 
-                (state.HeadSetup != 0))
+                (GetLinkId(state) == 3001))
             {
                 list[0].Actions.Add(new TwoPositionLinkAction()
                 {
                     LinkId = 3002,
-                    RequestedState = GetRequestedState(state)
+                    RequestedState = (state.HeadSetup != 0) ? TwoPositionLinkActionRequestedState.On : TwoPositionLinkActionRequestedState.Off
                 });
             }
 
