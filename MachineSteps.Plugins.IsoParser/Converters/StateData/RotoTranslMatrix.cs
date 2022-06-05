@@ -91,6 +91,32 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
             return result;
         }
 
+        public bool IsPlaneXZ()
+        {
+            bool result = false;
+
+            if (!IsIdentity())
+            {
+                if ((Math.Abs(I) == 1.0) &&
+                    (J == 0.0) &&
+                    (K == 0.0) &&
+                    (P == 0.0) &&
+                    (Q == 0.0) &&
+                    (Math.Abs(R) == 1.0) &&
+                    (U == 0.0) &&
+                    (Math.Abs(V) == 1.0) &&
+                    (W == 0.0) &&
+                    (M == 0.0) &&
+                    (Math.Abs(N) == 1.0) &&
+                    (O == 0.0))
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
         public void Transform(Nullable<double> xIn, Nullable<double> yIn, Nullable<double> zIn, ref Nullable<double> xOut, ref Nullable<double> yOut, ref Nullable<double> zOut)
         {
             if(IsIdentity())

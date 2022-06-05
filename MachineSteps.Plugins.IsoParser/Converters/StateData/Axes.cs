@@ -403,16 +403,40 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
 
         public void SetPosition(MachineStep step, double speed, double x, double y, double i, double j, bool cw)
         {
-            double _x = 0.0;
-            double _y = 0.0;
-            double _i = 0.0;
-            double _j = 0.0;
-            bool _cw = M.IsIdentityFlipped() ? !cw : cw;
+            if (M.IsPlaneXZ())
+            {
+                double? _x = 0.0;
+                double? _y = 0.0;
+                double? _z = 0.0;
+                double? _i = 0.0;
+                double? _j = 0.0;
+                double? _k = 0.0;
 
-            M.Transform(x, y, ref _x, ref _y);
-            M.Transform(i, j, ref _i, ref _j);
+                M.Transform(x, y, 0.0, ref _x, ref _y, ref _z);
+                M.Transform(i, j, 0.0, ref _i, ref _j, ref _k);
 
-            SetPositionBase(step, speed, _x, _y, _i, _j, _cw);
+                if (_x.HasValue && _z.HasValue && _i.HasValue && _k.HasValue)
+                {
+                    SetPositionBaseXZ(step, speed, _x.Value, _z.Value, _i.Value, _k.Value, cw);
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+            }
+            else
+            {
+                double _x = 0.0;
+                double _y = 0.0;
+                double _i = 0.0;
+                double _j = 0.0;
+                bool _cw = M.IsIdentityFlipped() ? !cw : cw;
+
+                M.Transform(x, y, ref _x, ref _y);
+                M.Transform(i, j, ref _i, ref _j);
+
+                SetPositionBase(step, speed, _x, _y, _i, _j, _cw);
+            }
         }
 
         private void SetPositionBase(MachineStep step, double speed, double x, double y, double i, double j, bool cw)
@@ -470,6 +494,64 @@ namespace MachineSteps.Plugins.IsoParser.Converters.StateData
             else
             {
                 V = y;
+            }
+        }
+
+        private void SetPositionBaseXZ(MachineStep step, double speed, double x, double y, double i, double j, bool cw)
+        {
+            x += OX;
+            y += OZ;
+            i += OX;
+            j += OZ;
+
+            var xMaster = (GantryX == Gantry.First);
+            var zMaster = (GantryZ == Gantry.First);
+            var actualX = xMaster ? X : U;
+            var actualZ = zMaster ? Z : W;
+            var v1 = new Tuple<double, double>(actualX - i, actualZ - j);
+            var v2 = new Tuple<double, double>(x - i, y - j);
+            var a1 = Math.Atan2(v1.Item2, v1.Item1);
+            var a2 = Math.Atan2(v2.Item2, v2.Item1);
+            var a = a2 - a1;
+            var r = Math.Sqrt(Math.Pow(v1.Item1, 2.0) + Math.Pow(v1.Item2, 2.0));
+
+            if (cw && a > 0.0) a = a - 2.0 * Math.PI;
+            else if (!cw && a < 0.0) a = 2.0 * Math.PI + a;
+
+            var d = Math.Abs((a * r) / speed) * 60.0;
+
+            var action = new ArcInterpolatedPositionLinkAction()
+            {
+                Name = cw ? "G2" : "G3",
+                Direction = cw ? ArcInterpolatedPositionLinkAction.ArcDirection.CW : ArcInterpolatedPositionLinkAction.ArcDirection.CCW,
+                Duration = d,
+                Radius = r,
+                StartAngle = a1,
+                EndAngle = a2,
+                Angle = a,
+                Components = new List<ArcInterpolatedPositionLinkAction.ArcComponent>()
+            };
+
+            action.Components.Add(new ArcInterpolatedPositionLinkAction.ArcComponent() { LinkId = xMaster ? 1 : 2, CenterCoordinate = i, TargetCoordinate = x, Type = ArcInterpolatedPositionLinkAction.ArcComponent.ArcComponentType.X });
+            action.Components.Add(new ArcInterpolatedPositionLinkAction.ArcComponent() { LinkId = zMaster ? 102 : 202, CenterCoordinate = j, TargetCoordinate = y, Type = ArcInterpolatedPositionLinkAction.ArcComponent.ArcComponentType.Y });
+            step?.Actions.Add(action);
+
+            if (xMaster)
+            {
+                X = x;
+            }
+            else
+            {
+                U = x;
+            }
+
+            if (zMaster)
+            {
+                Z = y;
+            }
+            else
+            {
+                W = y;
             }
         }
 
