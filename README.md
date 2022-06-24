@@ -14,7 +14,8 @@ This folder contains the files to simulate a simple 3 axis CNC being machined.
 [![](./images/ShowExample.JPG)](https://www.youtube.com/watch?v=u2I6zB-JCqI)
 
 ## MachineEditor
-Machine editor, allows creation and modification of machine struct. The machine struct could be save as simple *.xml file (it link machine elements models with absolute path) or archive *.mcfgx (it contains struct and models).
+Machine editor (MachineEditor.exe), allows creation, load and modification of machine struct. The machine struct could be save as simple *.xml file (it link machine elements models with absolute path) or archive *.mcfgx (portable version of struct and models with out the problem of absolute path of the file *.stl).
+You can start by load the archive example **Simple3AxesCnc.mcfgx** (command File->Import from archive), when you open that file you can see a static view of the machine (no movment), you can add and remove element in the machine structure and can change data and model of each single element. If you select an element of structure tree you can se its data, here you can find the link of the model file *.stl of that element.After import, you can find in the folder of the file **Simple3AxesCnc.mcfgx** another folter with the same name of the file, inside you you can see the file **machine.xml** and some file *.stl. You can open (command File->Open), edit and save (command File->Save) the file **machine.xml**, but the link of each file *.stl has an absolute path; if you want a portable format you have to save your machine as file *.mcfgx (File->Export to archive).
 
 <!-- ##MachineModels
 ##MachineModels.IO -->
@@ -33,7 +34,10 @@ Application for converting the ISO for cx100 into machine steps
 ## MachineSteps.Plugins.IsoParser
 ## MachineSteps.Plugins.StepsViewer -->
 ## MachineSteps.Viewer
-Application for viewing machine movements, it could load the machien struct (file *.xml or *.mcfgx) and relative tooling (file *.tooling) and then could show the machining (file *.msteps).
+Application for viewing machine movements.
+If you have the machine now you can move it: you have to load the machine (*.xml or *.mcfgx) in MachineSteps.Viewer.exe (command File->Open or File->Open archive), then you can move the elements with the sliders or the checks in the "Links" tab. If you want to execute a list of movements, you ave to create a file *.msteps, you can do it by [MachineSteps.Editor](#MachineSteps.Editor). You can find an example in the folder "Examples" (file **antina.msteps**); if you open that file in MachineSteps.Viewer.exe (command Steps->Load) you can see all machine steps in the "Steps" tab, now you can move the machine step by step or continuosly to to the end if you select "Steps->Dynamic transition" and "Steps->Auto step over" options.
+If you want, you can load a tooling file example **SimpleTooling.tooling** (command Tooling->Load), this file could be load by [ToolingEditor](#ToolingEditor).
+If you have load machine and tooling, you can save that environment (command File->Save environment); you can load the eample Simple3AxesCnc.env (command File->Open environment).
 
 <!-- ## MachineViewer
 ## MachineViewer.Plugins.Common
