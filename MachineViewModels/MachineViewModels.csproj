@@ -66,6 +66,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exporters\StlExporter.cs" />
     <Compile Include="Extensions\LinkExtensions.cs" />
     <Compile Include="ViewModels\Links\DynamicLinkViewModel.cs" />
     <Compile Include="ViewModels\Links\ILinkViewModel.cs" />

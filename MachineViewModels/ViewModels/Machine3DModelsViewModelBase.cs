@@ -2,7 +2,10 @@
 using HelixToolkit.Wpf;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using System.Windows.Media.Media3D;
+using GalaSoft.MvvmLight.CommandWpf;
+using EXP = MachineViewModels.Exporters;
 
 namespace ViewModels.MachineViewModels
 {
@@ -21,5 +24,31 @@ namespace ViewModels.MachineViewModels
 
         public double TraslationStep => (_viewport != null) ? Math.Sqrt(_viewport.Camera.Position.DistanceToSquared(new Point3D())) / 20000.0 : 1.0;
 
+        private ICommand _exportViewCommand;
+        public ICommand ExportViewCommand { get { return _exportViewCommand ?? (_exportViewCommand = new RelayCommand(() => ExportViewCommandImplementation())); } }
+
+        private void ExportViewCommandImplementation()
+        {
+            var dlg = new Microsoft.Win32.SaveFileDialog();
+
+            dlg.DefaultExt = "stl";
+            dlg.AddExtension = true;
+            dlg.Filter = "STL file format|*.stl";
+
+            var b = dlg.ShowDialog();
+
+            if (b.HasValue && b.Value)
+            {
+                foreach (var item in _viewport.Viewport.Children)
+                {
+                    if (item is MeshGeometryVisual3D mg3D)
+                    {
+                        EXP.StlExporter.Export(dlg.FileName, mg3D);
+                        break;
+                    }
+                }
+
+            }
+        }
     }
 }

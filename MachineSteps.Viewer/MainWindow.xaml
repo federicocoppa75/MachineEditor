@@ -36,6 +36,8 @@
                     <Separator/>
                     <MenuItem Header="Open environment" Command="{Binding FileOpenEnvironmentCommand}" />
                     <MenuItem Header="Save enviroment" Command="{Binding FileSaveEnvironmentCommand}" />
+                    <Separator/>
+                    <MenuItem Header="Export view" Command="{Binding ExportViewCommand}" />
                 </MenuItem>
                 <MenuItem Header="View">
                     <MenuItem Header="Panel holder" IsCheckable="True" IsChecked="{Binding IsPanelHolderVisible}"/>
