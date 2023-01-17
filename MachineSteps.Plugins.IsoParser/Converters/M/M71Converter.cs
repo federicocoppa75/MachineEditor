@@ -25,7 +25,8 @@ namespace MachineSteps.Plugins.IsoParser.Converters.M
 
             if((list != null) && 
                 (list.Count == 1) && 
-                (GetLinkId(state) == 3001))
+                (GetLinkId(state) == 3001) &&
+                state.HeadSetupSelected)
             {
                 list[0].Actions.Add(new TwoPositionLinkAction()
                 {

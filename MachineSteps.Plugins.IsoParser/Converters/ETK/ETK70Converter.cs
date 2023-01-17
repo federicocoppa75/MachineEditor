@@ -16,6 +16,7 @@ namespace MachineSteps.Plugins.IsoParser.Converters.ETK
             var v = (int)istruction.Value;
             
             state.HeadSetup = (v == 0) ? 1 : 0;
+            state.HeadSetupSelected = true;
 
             return null;
         }
