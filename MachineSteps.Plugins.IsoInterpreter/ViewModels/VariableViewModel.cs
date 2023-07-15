@@ -18,23 +18,21 @@ namespace MachineSteps.Plugins.IsoInterpreter.ViewModels
             get => _value;
             set
             {
-                if(Set(ref _value, value, nameof(Value)))
+                bool changed = Set(ref _value, value, nameof(Value));
+                bool computed = false;
+
+                if(ExpressionHelper.IsComputedValue(_value))
                 {
-                    bool computed = false;
-
-                    if(ExpressionHelper.IsComputedValue(_value))
-                    {
-                        ComputedValue = _value;
-                        computed = true;
-                    }
-                    else
-                    {
-                        computed = TryToComputeValue(_value);
-                    }
-
-                    UpdateStep();
-                    if(EnableNotifyChange && computed) NotifyChange();
+                    ComputedValue = _value;
+                    computed = true;
                 }
+                else
+                {
+                    computed = TryToComputeValue(_value);
+                }
+
+                UpdateStep();
+                if(EnableNotifyChange && computed) NotifyChange();
             }
         }
 

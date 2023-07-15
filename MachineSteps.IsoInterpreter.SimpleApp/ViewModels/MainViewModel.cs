@@ -77,36 +77,9 @@ namespace MachineSteps.IsoInterpreter.SimpleApp.ViewModels
             if (b.HasValue && b.Value)
             {
                 CloseFileImpl();
-
-                //using (var stream = File.OpenText(dlg.FileName))
-                //{
-                //    var lineNumber = 1;
-                //    var fileInfo = new FileInfo(dlg.FileName);
-                //    var filePath = fileInfo.DirectoryName;
-
-                //    IsoLineFactory.Reset();
-
-                //    while (true)
-                //    {
-                //        var line = stream.ReadLine();
-
-                //        if (line == null) break;
-
-                //        if(IsJumpSubroitine(line))
-                //        {
-                //            CreateSubrountineIstruction(lineNumber, GetSubroutine(line, filePath), (il) => IsoLines.Add(new IsoLineViewModel(il)));
-                //        }
-                //        else if (!string.IsNullOrWhiteSpace(line) && !IsCommentLine(line))
-                //        {
-                //            //IsoLines.Add(new IsoLineViewModel(IsoLineFactory.Create(lineNumber, FilterLine(line))));
-                //            IsoLineFactory.Create(lineNumber, FilterLine(line), (il) => IsoLines.Add(new IsoLineViewModel(il)));
-                //        }
-
-                //        lineNumber++;
-                //    }
-                //}
-
                 OpenFileImpl(dlg.FileName, IsoLines);
+
+                if (IsoLines.Count > 0) Selected = IsoLines[0];
             }
         }
 

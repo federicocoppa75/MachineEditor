@@ -89,7 +89,15 @@ namespace MachineSteps.Plugins.IsoInterpreter.ViewModels
         {
             var builder = new StringBuilder();
 
-            builder.AppendFormat("({0})+({1})", Value, value);
+            if(IsComputed)
+            {
+                builder.AppendFormat("({0})+({1})", ComputedValue, value);
+            }
+            else
+            {
+                builder.AppendFormat("({0})+({1})", Value, value);
+            }
+
             Value = builder.ToString();
         }
 
