@@ -56,7 +56,7 @@ namespace MachineSteps.Plugins.IsoInterpreter.Istructions
         {
             var vr = ParseVariableName(msg.Name);
             var value = double.Parse(msg.Value, NumberStyles.Any, CultureInfo.InvariantCulture);
-            var istruction = new SetVariableIstruction(vr.Item1, vr.Item2, value);
+            var istruction = new SetVariableIstruction(vr.Item1, vr.Item2, value) { LineNumber = msg.Step };
             var steps = _converterManager.Convert(istruction);
 
             if ((steps != null) && (steps.Count > 0)) MachineSteps.AddRange(steps);
