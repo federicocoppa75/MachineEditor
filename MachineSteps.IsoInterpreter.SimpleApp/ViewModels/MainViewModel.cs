@@ -190,7 +190,9 @@ namespace MachineSteps.IsoInterpreter.SimpleApp.ViewModels
         private void OneShotProcessImpl()
         {
             var istrToAction = new IstructionToActionConverter();
+            var enableGiveSelectedStep = _enableGiveSelectedStep;
 
+            _enableGiveSelectedStep = false;
             _enableGiveStepRowNumber = true;
             istrToAction.StartListen();
 
@@ -202,8 +204,9 @@ namespace MachineSteps.IsoInterpreter.SimpleApp.ViewModels
 
             istrToAction.StopListen();
             _enableGiveStepRowNumber = false;
+            _enableGiveSelectedStep = enableGiveSelectedStep;
 
-            if((istrToAction.MachineSteps != null) && (istrToAction.MachineSteps.Count > 0))
+            if ((istrToAction.MachineSteps != null) && (istrToAction.MachineSteps.Count > 0))
             {
                 SaveMachineSteps(istrToAction.MachineSteps);
             }
