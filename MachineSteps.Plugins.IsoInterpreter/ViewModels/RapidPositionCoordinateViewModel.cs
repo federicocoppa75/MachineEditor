@@ -12,6 +12,8 @@ namespace MachineSteps.Plugins.IsoInterpreter.ViewModels
 {
     public class RapidPositionCoordinateViewModel : ViewModelBase
     {
+        private bool _referenceChanged; // indica che è cambiato il sistema di riferimento
+
         public string Name { get; set; }
 
         private string _value;
@@ -37,6 +39,7 @@ namespace MachineSteps.Plugins.IsoInterpreter.ViewModels
 
                     UpdateStep();
                     IsComputed = computed;
+                    _referenceChanged = false;
                 }
             }
         }
@@ -83,19 +86,34 @@ namespace MachineSteps.Plugins.IsoInterpreter.ViewModels
         public RapidPositionCoordinateViewModel()
         {
             MessengerInstance.Register<GetAxisValueMessage>(this, OnGetAxisValueMessage);
+            MessengerInstance.Register<ShiftValueChangedMessage>(this, OnShiftValueChangedMessage);
         }
 
         public void Add(string value)
         {
             var builder = new StringBuilder();
 
-            if(IsComputed)
+            if (_referenceChanged)
             {
-                builder.AppendFormat("({0})+({1})", ComputedValue, value);
+                if (IsComputed)
+                {
+                    builder.AppendFormat("({0})+({1})", ValueOnLevel, value);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Couldn't set incremental value on not computed value!");
+                }
             }
             else
             {
-                builder.AppendFormat("({0})+({1})", Value, value);
+                if (IsComputed)
+                {
+                    builder.AppendFormat("({0})+({1})", ComputedValue, value);
+                }
+                else
+                {
+                    builder.AppendFormat("({0})+({1})", Value, value);
+                }
             }
 
             Value = builder.ToString();
@@ -220,6 +238,16 @@ namespace MachineSteps.Plugins.IsoInterpreter.ViewModels
                 }
 
                 msg.SetFinded?.Invoke();
+            }
+        }
+
+        private void OnShiftValueChangedMessage(ShiftValueChangedMessage msg)
+        {
+            if (((msg.Direction == Enums.ShiftDirection.X) && (Name[0] == 'X')) ||
+                ((msg.Direction == Enums.ShiftDirection.Y) && (Name[0] == 'Y')) ||
+                ((msg.Direction == Enums.ShiftDirection.Z) && (Name[0] == 'Z')))
+            {
+                _referenceChanged = true;
             }
         }
 
