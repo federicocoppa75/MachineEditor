@@ -102,6 +102,10 @@ namespace MachineSteps.Plugins.IsoInterpreter.Models
                     isoLine = Create(lineNumber, G91.Remove(lineData), null);
                 }
             }
+            else if(G210Line.Match(lineData))
+            {
+                isoLine = G210Line.Parse(lineData);
+            }
             else
             {
                 isoLine = new IsoLine();

@@ -63,6 +63,9 @@ namespace MachineSteps.Plugins.IsoInterpreter.Extensions
                 case IsoLineType.G91:
                     Process((G91)isoLine);
                     break;
+                case IsoLineType.G210:
+                    Process((G210Line)isoLine);
+                    break;
                 default:
                     break;
             }
@@ -76,11 +79,11 @@ namespace MachineSteps.Plugins.IsoInterpreter.Extensions
 
         public static void Process(G0Line isoLine) => Messenger.Default.Send(new G0LineMessage() { Coordinates = isoLine.Coordinates, IsIncremental = isoLine.IsIncremental });
 
-        public static void Process(G1Line isoLine) => Messenger.Default.Send(new G1LineMessage() { Coordinates = isoLine.Coordinates });
+        public static void Process(G1Line isoLine) => Messenger.Default.Send(new G1LineMessage() { Coordinates = isoLine.Coordinates, Type = 1 });
 
-        public static void Process(G2Arc isoLine) => Messenger.Default.Send(new G2ArcMessage() { Coordinates = isoLine.Coordinates });
+        public static void Process(G2Arc isoLine) => Messenger.Default.Send(new G2ArcMessage() { Coordinates = isoLine.Coordinates, Type = 2 });
 
-        public static void Process(G3Arc isoLine) => Messenger.Default.Send(new G3ArcMessage() { Coordinates = isoLine.Coordinates });
+        public static void Process(G3Arc isoLine) => Messenger.Default.Send(new G3ArcMessage() { Coordinates = isoLine.Coordinates, Type = 3 });
         
         public static void Process(ExkVariableLine isoLine) => Messenger.Default.Send(new SetVariableValueMessage() { Name = isoLine.Name, Value = isoLine.Value, VariableType = GetVariableType(isoLine) });
 
@@ -103,6 +106,8 @@ namespace MachineSteps.Plugins.IsoInterpreter.Extensions
         public static void Process(G90 isoLine) => Messenger.Default.Send(new G90Message());
 
         public static void Process(G91 isoLine) => Messenger.Default.Send(new G91Message());
+
+        public static void Process(G210Line isoLine) => Messenger.Default.Send(new G210LineMessage() { Coordinates = isoLine.Coordinates, IsIncremental = true, Type = 210 });
 
         private static VariableType GetVariableType(VariableLine isoLine)
         {

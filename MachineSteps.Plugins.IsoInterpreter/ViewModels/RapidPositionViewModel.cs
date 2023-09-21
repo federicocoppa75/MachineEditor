@@ -26,7 +26,10 @@ namespace MachineSteps.Plugins.IsoInterpreter.ViewModels
             MessengerInstance.Register<IstructionListenerSwitchOffMessage>(this, (m) => _notifyChange = false);
             //MessengerInstance.Register<G90Message>(this, (m) => IsIncremental = false);
             //MessengerInstance.Register<G91Message>(this, (m) => IsIncremental = true);
+            MessengerInstance.Register<G210LineMessage>(this, OnG210LineMessage);
         }
+
+        private void OnG210LineMessage(G210LineMessage msg) => OnGElementMessage(msg);
 
         private void OnIsoLineSelectionChangedMessage(IsoLineSelectionChangedMessage msg)
         {

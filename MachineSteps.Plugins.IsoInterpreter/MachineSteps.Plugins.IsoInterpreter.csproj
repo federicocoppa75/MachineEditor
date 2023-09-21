@@ -97,6 +97,7 @@
     <Compile Include="Converters\ETK\ETK8Converter.cs" />
     <Compile Include="Converters\G\G0Converter.cs" />
     <Compile Include="Converters\G\G1Converter.cs" />
+    <Compile Include="Converters\G\G210Converter.cs" />
     <Compile Include="Converters\G\G2Converter.cs" />
     <Compile Include="Converters\G\G3Converter.cs" />
     <Compile Include="Converters\M\M120Converter.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Messages\FlushIsoLinesMessage.cs" />
     <Compile Include="Messages\G0LineMessage.cs" />
     <Compile Include="Messages\G1LineMessage.cs" />
+    <Compile Include="Messages\G210LineMessage.cs" />
     <Compile Include="Messages\G2ArcMessage.cs" />
     <Compile Include="Messages\G3ArcMessage.cs" />
     <Compile Include="Messages\G90Message.cs" />
@@ -184,6 +186,7 @@
     <Compile Include="Models\ExkVariableLine.cs" />
     <Compile Include="Models\G0Line.cs" />
     <Compile Include="Models\G1Line.cs" />
+    <Compile Include="Models\G210Line.cs" />
     <Compile Include="Models\G2Arc.cs" />
     <Compile Include="Models\G3Arc.cs" />
     <Compile Include="Models\G90.cs" />
